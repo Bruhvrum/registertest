@@ -143,7 +143,7 @@
             </p>
 
             <p class="font-medium text-gray-700 mb-2">Horse Parameters:</p>
-            <code class="bg-indigo-100 text-gray-700">//horse p &lt;skinId&gt; &lt;facetd&gt; &lt;nameId&gt; &lt;tailId&gt;</code>
+            <code class="bg-indigo-100 text-gray-700">//horse parts &lt;skinId&gt; &lt;facetd&gt; &lt;maneId&gt; &lt;tailId&gt;</code>
             <p class="text-gray-600 text-sm">
                 This command allows you to customize your horse's appearance and attributes.
             </p>
@@ -259,6 +259,11 @@
                         <option value="28">28 - Curly Brown</option>
                         <option value="29">29 - Curly Dark Brown</option>
                         <option value="30">30 - Curly Gray</option>
+                        <option value="11">11 - Shaved Black</option>
+                        <option value="12">12 - Shaved White</option>
+                        <option value="13">13 - Shaved Brown</option>
+                        <option value="14">14 - Shaved Dark Brown</option>
+                        <option value="15">15 - Shaved Gray</option>
                         <option value="0">0 - No Tail</option>
                     </select>
                 </div>
@@ -277,6 +282,7 @@
         // Ensure the global variables are defined or default to a placeholder
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        // FIX: Corrected variable reference from 'initialAuthToken' to '__initial_auth_token'
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
         // --- User Registration Form Logic ---
@@ -364,13 +370,19 @@
         const copyMessageElement = document.getElementById('copyMessage');
 
         function generateHorseCommand() {
+            console.log('Generating command...'); // Debugging log
             const skinId = skinIdSelect.value;
             const maneId = maneIdSelect.value;
             const tailId = tailIdSelect.value;
             const faceId = 0; // As per instructions, faceId is always 0
 
-            const command = `//horse p ${skinId} ${faceId} ${maneId} ${tailId}`;
+            console.log('Skin ID:', skinId); // Debugging log
+            console.log('Mane ID:', maneId); // Debugging log
+            console.log('Tail ID:', tailId); // Debugging log
+
+            const command = `//horse parts ${skinId} ${faceId} ${maneId} ${tailId}`;
             generatedCommandInput.value = command;
+            console.log('Generated Command:', command); // Debugging log
         }
 
         function copyCommand() {
