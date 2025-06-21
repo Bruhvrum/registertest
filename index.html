@@ -293,11 +293,33 @@
     </div>
 
     <script>
-        // Ensure the global variables are defined or default to a placeholder
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        // FIX: Corrected variable reference from 'initialAuthToken' to '__initial_auth_token'
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        // --- Message Display Helper ---
+        function displayMessage(text, type = 'info') { // type can be 'success', 'error', 'warning', 'info'
+            const messageContainer = document.getElementById('messageContainer');
+            const messageText = document.getElementById('messageText');
+
+            // Clear previous classes and ensure it's visible
+            messageContainer.className = 'mt-6 p-4 rounded-lg text-center';
+
+            messageText.textContent = text;
+            
+            // Apply new classes based on type
+            switch (type) {
+                case 'success':
+                    messageContainer.classList.add('bg-green-100', 'text-green-800');
+                    break;
+                case 'error':
+                    messageContainer.classList.add('bg-red-100', 'text-red-800');
+                    break;
+                case 'warning': 
+                    messageContainer.classList.add('bg-yellow-100', 'text-yellow-800');
+                    break;
+                case 'info': 
+                default:
+                    messageContainer.classList.add('bg-blue-100', 'text-blue-800');
+                    break;
+            }
+        }
 
         // --- User Registration Form Logic ---
         document.getElementById('userRegistrationForm').addEventListener('submit', async function(event) {
@@ -306,42 +328,51 @@
             let username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value;
 
-            const messageContainer = document.getElementById('messageContainer');
-            const messageText = document.getElementById('messageText');
-            messageContainer.classList.add('hidden'); // Hide previous messages
-
+            // Client-side validation: empty fields
             if (!username || !password) {
-                messageText.textContent = 'Please enter both username and password.';
-                messageContainer.classList.remove('hidden');
-                messageContainer.classList.remove('bg-green-100', 'bg-red-100', 'text-green-800', 'text-red-800', 'bg-blue-100', 'text-blue-800');
-                messageContainer.classList.add('bg-yellow-100', 'text-yellow-800');
+                displayMessage('Please enter both username and password.', 'warning');
+                return;
+            }
+
+            // Client-side validation: username character pattern (matches backend)
+            // Backend regex: r'^[a-zA-Z0-9]+$'
+            const usernameRegex = /^[a-zA-Z0-9]+$/;
+            if (!usernameRegex.test(username)) {
+                displayMessage('Username must contain only standard letters and numbers (A-Z, a-z, 0-9).', 'warning');
+                return;
+            }
+
+            // Client-side validation: minimum password length (example)
+            const MIN_PASSWORD_LENGTH = 3; // Given it's a test and not hashed, keeping it low, but could be higher
+            if (password.length < MIN_PASSWORD_LENGTH) {
+                displayMessage(`Password must be at least ${MIN_PASSWORD_LENGTH} characters long.`, 'warning');
                 return;
             }
 
             const originalUsername = username;
-            username = username.toLowerCase(); // Convert username to lowercase
+            username = username.toLowerCase(); // Convert username to lowercase for backend consistency
 
+            // Inform user if username was lowercased
             if (originalUsername !== username) {
-                messageText.textContent = `Username set to lowercase due to formatting: "${username}". You'll be able to set your actual in-game name during character creation!`;
-                messageContainer.classList.remove('hidden');
-                messageContainer.classList.remove('bg-green-100', 'bg-red-100', 'bg-yellow-100', 'text-green-800', 'text-red-800', 'text-yellow-800');
-                messageContainer.classList.add('bg-blue-100', 'text-blue-800');
+                displayMessage(`Username converted to lowercase: "${username}". You can set your in-game name during character creation!`, 'info');
+                // Wait briefly before sending the request to allow user to read the message
                 setTimeout(async () => {
-                    await sendRegistrationRequest(username, password, messageContainer, messageText);
+                    await sendRegistrationRequest(username, password);
                 }, 2500);
                 return;
             }
 
-            await sendRegistrationRequest(username, password, messageContainer, messageText);
+            await sendRegistrationRequest(username, password);
         });
 
-        async function sendRegistrationRequest(username, password, messageContainer, messageText) {
+        async function sendRegistrationRequest(username, password) {
             const userData = {
                 username: username,
                 password: password
             };
 
-            const apiUrl = 'https://registertestdomain.duckdns.org/register';
+            // IMPORTANT: Replace with your actual backend URL!
+            const apiUrl = 'https://registertestdomain.duckdns.org/register'; 
             console.log('Attempting to register user with URL:', apiUrl);
 
             try {
@@ -353,25 +384,25 @@
                     body: JSON.stringify(userData)
                 });
 
-                const result = await response.json();
+                const result = await response.json(); // Always try to parse JSON, even for errors
 
-                if (response.ok) {
-                    messageText.textContent = `${result.message} You can now edit your launcher settings to join the server!`;
-                    messageContainer.classList.remove('hidden');
-                    messageContainer.classList.remove('bg-yellow-100', 'bg-red-100', 'bg-blue-100', 'text-yellow-800', 'text-red-800', 'text-blue-800');
-                    messageContainer.classList.add('bg-green-100', 'text-green-800');
-                } else {
-                    messageText.textContent = `Error: ${result.error || 'Something went wrong on the server.'}`;
-                    messageContainer.classList.remove('hidden');
-                    messageContainer.classList.remove('bg-green-100', 'bg-yellow-100', 'bg-blue-100', 'text-green-800', 'text-yellow-800', 'text-blue-800');
-                    messageContainer.classList.add('bg-red-100', 'text-red-800');
+                // Handle responses based on HTTP status codes and backend messages
+                if (response.ok) { // Status 200 OK
+                    displayMessage(`${result.message} You can now edit your launcher settings to join the server!`, 'success');
+                } else if (response.status === 400) { // Bad Request (e.g., missing fields, invalid format)
+                    displayMessage(`Error: ${result.error}`, 'warning'); // Use warning for user-correctable errors
+                } else if (response.status === 409) { // Conflict (e.g., user exists, character name exists)
+                    displayMessage(`Error: ${result.error}`, 'warning');
+                } else if (response.status === 429) { // Too Many Requests (Rate Limited)
+                    displayMessage(`Too many registration attempts. Please try again later.`, 'error');
+                } else if (response.status >= 500) { // Server Errors
+                    displayMessage(`Server error: ${result.error || 'An unexpected server error occurred.'} Please try again later.`, 'error');
+                } else { // Other unexpected errors
+                    displayMessage(`An unexpected response occurred: ${result.error || 'Please try again.'}`, 'error');
                 }
             } catch (error) {
                 console.error('Network error or server unavailable:', error);
-                messageText.textContent = 'Network error or server is not reachable. Please check the server address, server status, or firewall settings.';
-                messageContainer.classList.remove('hidden');
-                messageContainer.classList.remove('bg-green-100', 'bg-yellow-100', 'bg-blue-100', 'text-green-800', 'text-yellow-800', 'text-blue-800');
-                messageContainer.classList.add('bg-red-100', 'text-red-800');
+                displayMessage('Network error or server is not reachable. Please check the server address, server status, or firewall settings.', 'error');
             }
         }
 
@@ -384,19 +415,13 @@
         const copyMessageElement = document.getElementById('copyMessage');
 
         function generateHorseCommand() {
-            console.log('Generating command...'); // Debugging log
             const skinId = skinIdSelect.value;
             const maneId = maneIdSelect.value;
             const tailId = tailIdSelect.value;
             const faceId = 0; // As per instructions, faceId is always 0
 
-            console.log('Skin ID:', skinId); // Debugging log
-            console.log('Mane ID:', maneId); // Debugging log
-            console.log('Tail ID:', tailId); // Debugging log
-
             const command = `//horse parts ${skinId} ${faceId} ${maneId} ${tailId}`;
             generatedCommandInput.value = command;
-            console.log('Generated Command:', command); // Debugging log
         }
 
         function copyCommand() {
