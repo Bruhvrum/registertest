@@ -126,10 +126,18 @@
             flex-shrink: 0;
         }
         #refreshCaptchaBtn {
-            padding: 6px;
+            /* Explicitly define the size */
+            width: 32px;
+            height: 32px;
+
+            /* Use flexbox to center the icon */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            /* Keep these styles */
             background-color: #e5e7eb; /* gray-200 */
             border-radius: 50%; /* Make it circular */
-            line-height: 0; /* Align icon better */
             flex-shrink: 0;
         }
         #refreshCaptchaBtn:hover {
@@ -164,7 +172,7 @@
                 <input type="password" id="password" name="password" placeholder="Choose a password" class="focus:ring-indigo-500 focus:border-indigo-500" required>
             </div>
             
-            <!-- NEW: CAPTCHA Section -->
+            <!-- CAPTCHA Section -->
             <div>
                 <label for="captchaInput" class="block text-sm font-medium text-gray-700 mb-1">Captcha:</label>
                 <div class="captcha-container">
