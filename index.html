@@ -106,6 +106,35 @@
             font-weight: 500;
             text-align: center;
         }
+        /* Styles for the new CAPTCHA */
+        .captcha-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        #captchaDisplay {
+            padding: 10px 15px;
+            background-color: #f3f4f6; /* gray-100 */
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.25rem;
+            font-weight: bold;
+            letter-spacing: 0.2em;
+            text-decoration: line-through;
+            color: #374151; /* gray-700 */
+            user-select: none; /* Prevent text selection */
+            flex-shrink: 0;
+        }
+        #refreshCaptchaBtn {
+            padding: 6px;
+            background-color: #e5e7eb; /* gray-200 */
+            border-radius: 50%; /* Make it circular */
+            line-height: 0; /* Align icon better */
+            flex-shrink: 0;
+        }
+        #refreshCaptchaBtn:hover {
+            background-color: #d1d5db; /* gray-300 */
+        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
@@ -134,6 +163,21 @@
                 <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password (Token):</label>
                 <input type="password" id="password" name="password" placeholder="Choose a password" class="focus:ring-indigo-500 focus:border-indigo-500" required>
             </div>
+            
+            <!-- NEW: CAPTCHA Section -->
+            <div>
+                <label for="captchaInput" class="block text-sm font-medium text-gray-700 mb-1">Captcha:</label>
+                <div class="captcha-container">
+                    <span id="captchaDisplay" title="Enter these 4 numbers"></span>
+                    <input type="text" id="captchaInput" name="captchaInput" placeholder="Enter the 4 numbers" class="focus:ring-indigo-500 focus:border-indigo-500" required autocomplete="off">
+                    <button type="button" id="refreshCaptchaBtn" title="Get a new code">
+                        <svg class="w-5 h-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0011.664 0l3.181-3.183m-4.991-2.693L19.01 7.982a8.25 8.25 0 00-11.664 0L2.985 11.952m11.664 0l-3.181 3.183" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
             <button type="submit" class="btn-primary w-full shadow-md">Register User</button>
         </form>
 
@@ -156,14 +200,14 @@
             <p class="text-gray-600 text-sm mb-4">You can use these commands in the game chat (Ranch Chat) after logging in:</p>
             
             <p class="font-medium text-gray-700 mb-2">Give Item:</p>
-            <code class="bg-indigo-100 text-gray-700">//give item &lt;count&gt; &lt;item ID&gt;</code>
+            <code class="bg-indigo-100 text-gray-700">//give item <count> <item ID></code>
             <p class="text-gray-600 text-sm mb-4">
                 Easily generate this command using the helpful website: 
                 <a href="https://samuelll41.github.io/alicia/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 font-medium">samuelll41.github.io/alicia/</a>
             </p>
 
             <p class="font-medium text-gray-700 mb-2">Horse Parameters:</p>
-            <code class="bg-indigo-100 text-gray-700">//horse parts &lt;skinId&gt; &lt;facetd&gt; &lt;maneId&gt; &lt;tailId&gt;</code>
+            <code class="bg-indigo-100 text-gray-700">//horse parts <skinId> <facetd> <maneId> <tailId></code>
             <p class="text-gray-600 text-sm">
                 This command allows you to customize your horse's appearance and attributes.
             </p>
@@ -299,6 +343,22 @@
     </div>
 
     <script>
+        // --- CAPTCHA Logic ---
+        const captchaDisplay = document.getElementById('captchaDisplay');
+        const captchaInput = document.getElementById('captchaInput');
+        const refreshCaptchaBtn = document.getElementById('refreshCaptchaBtn');
+        let correctCaptcha = '';
+
+        function generateCaptcha() {
+            // Generate a random 4-digit number
+            const num = Math.floor(1000 + Math.random() * 9000);
+            correctCaptcha = num.toString();
+            captchaDisplay.textContent = correctCaptcha;
+            captchaInput.value = ''; // Clear previous input
+        }
+
+        refreshCaptchaBtn.addEventListener('click', generateCaptcha);
+        
         // --- Message Display Helper ---
         function displayMessage(text, type = 'info') { // type can be 'success', 'error', 'warning', 'info'
             const messageContainer = document.getElementById('messageContainer');
@@ -331,6 +391,13 @@
         document.getElementById('userRegistrationForm').addEventListener('submit', async function(event) {
             event.preventDefault(); // Prevent default form submission
 
+            // --- CAPTCHA Validation ---
+            if (captchaInput.value !== correctCaptcha) {
+                displayMessage('Incorrect CAPTCHA. Please try again.', 'warning');
+                generateCaptcha(); // Generate a new captcha for the user
+                return;
+            }
+
             let username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value;
 
@@ -341,15 +408,14 @@
             }
 
             // Client-side validation: username character pattern (matches backend)
-            // Backend regex: r'^[a-zA-Z0-9]+$'
             const usernameRegex = /^[a-zA-Z0-9]+$/;
             if (!usernameRegex.test(username)) {
                 displayMessage('Username must contain only standard letters and numbers (A-Z, a-z, 0-9).', 'warning');
                 return;
             }
 
-            // Client-side validation: minimum password length (example)
-            const MIN_PASSWORD_LENGTH = 3; // Given it's a test and not hashed, keeping it low, but could be higher
+            // Client-side validation: minimum password length
+            const MIN_PASSWORD_LENGTH = 3;
             if (password.length < MIN_PASSWORD_LENGTH) {
                 displayMessage(`Password must be at least ${MIN_PASSWORD_LENGTH} characters long.`, 'warning');
                 return;
@@ -358,10 +424,8 @@
             const originalUsername = username;
             username = username.toLowerCase(); // Convert username to lowercase for backend consistency
 
-            // Inform user if username was lowercased
             if (originalUsername !== username) {
                 displayMessage(`Username converted to lowercase: "${username}". You can set your in-game name during character creation!`, 'info');
-                // Wait briefly before sending the request to allow user to read the message
                 setTimeout(async () => {
                     await sendRegistrationRequest(username, password);
                 }, 2500);
@@ -377,7 +441,6 @@
                 password: password
             };
 
-            // IMPORTANT: Replace with your actual backend URL!
             const apiUrl = 'https://registertestdomain.duckdns.org/register'; 
             console.log('Attempting to register user with URL:', apiUrl);
 
@@ -390,26 +453,24 @@
                     body: JSON.stringify(userData)
                 });
 
-                const result = await response.json(); // Always try to parse JSON, even for errors
+                const result = await response.json();
 
-                // Handle responses based on HTTP status codes and backend messages
-                if (response.ok) { // Status 200 OK
+                if (response.ok) {
                     displayMessage(`${result.message} You can now edit your launcher settings to join the server!`, 'success');
-                } else if (response.status === 400) { // Bad Request (e.g., missing fields, invalid format)
-                    displayMessage(`Error: ${result.error}`, 'warning'); // Use warning for user-correctable errors
-                } else if (response.status === 409) { // Conflict (e.g., user exists, character name exists)
+                } else if (response.status === 400 || response.status === 409) {
                     displayMessage(`Error: ${result.error}`, 'warning');
-                } else if (response.status === 429) { // Too Many Requests (Rate Limited)
+                } else if (response.status === 429) {
                     displayMessage(`Too many registration attempts. Please try again later.`, 'error');
-                } else if (response.status >= 500) { // Server Errors
+                } else {
                     displayMessage(`Server error: ${result.error || 'An unexpected server error occurred.'} Please try again later.`, 'error');
-                } else { // Other unexpected errors
-                    displayMessage(`An unexpected response occurred: ${result.error || 'Please try again.'}`, 'error');
                 }
             } catch (error) {
                 console.error('Network error or server unavailable:', error);
                 displayMessage('Network error or server is not reachable. Please check the server address, server status, or firewall settings.', 'error');
             }
+            
+            // Generate a new captcha after every registration attempt (success or fail)
+            generateCaptcha();
         }
 
         // --- Horse Command Generator Logic ---
@@ -445,8 +506,9 @@
         tailIdSelect.addEventListener('change', generateHorseCommand);
         copyCommandBtn.addEventListener('click', copyCommand);
 
-        // Initialize command on page load
+        // Initialize command and CAPTCHA on page load
         generateHorseCommand();
+        generateCaptcha();
     </script>
 </body>
 </html>
