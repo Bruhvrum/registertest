@@ -106,12 +106,7 @@
             font-weight: 500;
             text-align: center;
         }
-        /* Styles for the new CAPTCHA */
-        .captcha-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+        /* CAPTCHA */
         #captchaDisplay {
             padding: 10px 15px;
             background-color: #f3f4f6; /* gray-100 */
@@ -119,29 +114,10 @@
             font-family: 'Courier New', Courier, monospace;
             font-size: 1.25rem;
             font-weight: bold;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.3em;
             text-decoration: line-through;
             color: #374151; /* gray-700 */
             user-select: none; /* Prevent text selection */
-            flex-shrink: 0;
-        }
-        #refreshCaptchaBtn {
-            /* Explicitly define the size */
-            width: 32px;
-            height: 32px;
-
-            /* Use flexbox to center the icon */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            /* Keep these styles */
-            background-color: #e5e7eb; /* gray-200 */
-            border-radius: 50%; /* Make it circular */
-            flex-shrink: 0;
-        }
-        #refreshCaptchaBtn:hover {
-            background-color: #d1d5db; /* gray-300 */
         }
     </style>
 </head>
@@ -175,15 +151,11 @@
             <!-- CAPTCHA Section -->
             <div>
                 <label for="captchaInput" class="block text-sm font-medium text-gray-700 mb-1">Captcha:</label>
-                <div class="captcha-container">
-                    <span id="captchaDisplay" title="Enter these 4 numbers"></span>
-                    <input type="text" id="captchaInput" name="captchaInput" placeholder="Enter the 4 numbers" class="focus:ring-indigo-500 focus:border-indigo-500" required autocomplete="off">
-                    <button type="button" id="refreshCaptchaBtn" title="Get a new code">
-                        <svg class="w-5 h-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0011.664 0l3.181-3.183m-4.991-2.693L19.01 7.982a8.25 8.25 0 00-11.664 0L2.985 11.952m11.664 0l-3.181 3.183" />
-                        </svg>
-                    </button>
+                <div class="flex items-center space-x-4 mb-2">
+                    <span id="captchaDisplay" title="The 4 numbers to enter"></span>
+                    <button type="button" id="refreshCaptchaBtn" class="btn-secondary text-sm font-medium py-2 px-3">New Code</button>
                 </div>
+                <input type="text" id="captchaInput" name="captchaInput" placeholder="Enter the 4 numbers above" class="focus:ring-indigo-500 focus:border-indigo-500" required autocomplete="off">
             </div>
 
             <button type="submit" class="btn-primary w-full shadow-md">Register User</button>
