@@ -19,7 +19,7 @@
             border-radius: 8px;
             border: 1px solid #d1d5db;
             width: 100%;
-            box-sizing: border-box; /* Ensures padding doesn't increase total width */
+            box-sizing: border-box;
         }
         select {
             padding: 10px;
@@ -27,8 +27,8 @@
             border: 1px solid #d1d5db;
             width: 100%;
             box-sizing: border-box;
-            background-color: white; /* Ensure consistent background */
-            appearance: none; /* Remove default arrow */
+            background-color: white;
+            appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9' /%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 0.7rem center;
@@ -52,14 +52,13 @@
             background-color: #4338ca;
         }
         .btn-secondary {
-            background-color: #e0e7ff; /* indigo-100 */
-            color: #4338ca; /* indigo-700 */
-            border: 1px solid #c7d2fe; /* indigo-200 */
+            background-color: #e0e7ff;
+            color: #4338ca;
+            border: 1px solid #c7d2fe;
         }
         .btn-secondary:hover {
-            background-color: #c7d2fe; /* indigo-200 */
+            background-color: #c7d2fe;
         }
-        /* Custom styles for sections */
         .info-box {
             background-color: #f9fafb;
             border: 1px solid #e5e7eb;
@@ -69,30 +68,30 @@
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
         }
         .info-box h2 {
-            font-size: 1.25rem; /* text-xl */
-            font-weight: 600; /* font-semibold */
-            color: #374151; /* text-gray-700 */
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #374151;
             margin-bottom: 1rem;
             text-align: center;
         }
         .info-box code {
             display: block;
-            background-color: #e0e7ff; /* indigo-100 */
-            color: #374151; /* gray-700 */
+            background-color: #e0e7ff;
+            color: #374151;
             padding: 0.75rem 1rem;
             border-radius: 6px;
             font-family: monospace;
-            white-space: pre-wrap; /* Ensures text wraps within the box */
-            word-break: break-all; /* Breaks long words */
+            white-space: pre-wrap;
+            word-break: break-all;
             margin-bottom: 0.75rem;
         }
         .info-box p {
-            color: #4b5563; /* text-gray-600 */
-            font-size: 0.875rem; /* text-sm */
+            color: #4b5563;
+            font-size: 0.875rem;
             line-height: 1.5;
         }
         .info-box a {
-            color: #4f46e5; /* indigo-600 */
+            color: #4f46e5;
             text-decoration: none;
             font-weight: 500;
         }
@@ -102,254 +101,142 @@
         .copy-message {
             margin-top: 0.5rem;
             font-size: 0.875rem;
-            color: #10b981; /* green-500 */
+            color: #10b981;
             font-weight: 500;
             text-align: center;
         }
-        /* CAPTCHA */
         #captchaDisplay {
             padding: 10px 15px;
-            background-color: #f3f4f6; /* gray-100 */
+            background-color: #f3f4f6;
             border-radius: 8px;
             font-family: 'Courier New', Courier, monospace;
             font-size: 1.25rem;
             font-weight: bold;
             letter-spacing: 0.3em;
             text-decoration: line-through;
-            color: #374151; /* gray-700 */
-            user-select: none; /* Prevent text selection */
+            color: #374151;
+            user-select: none;
+        }
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            padding: 0.75rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            border: 1px solid #e5e7eb;
+        }
+        .nav-button {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            text-decoration: none;
+            color: #374151;
+            background-color: #f9fafb;
+            border: 1px solid #d1d5db;
+            transition: all 0.2s;
+        }
+        .nav-button:hover {
+            background-color: #f3f4f6;
+            border-color: #9ca3af;
+            transform: translateY(-1px);
+        }
+        .nav-button.active {
+            background-color: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
         }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
-    <div class="container bg-white p-8 rounded-lg shadow-xl border border-gray-200">
-        <h1 class="text-3xl font-bold text-center text-gray-800 mb-4">Chrommd's test server</h1>
-        <p class="text-center text-gray-600 mb-8">
-            This is a for-fun test server running the latest SoA server build. Anyone is welcome to join! A setup guide and useful in-game commands are available below. Enjoy your stay!
-        </p>
-
-        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-8" role="alert">
-            <strong class="font-bold">IMPORTANT WARNING – Temporary Test Server</strong>
-            <ul class="list-disc list-inside text-sm mt-2 space-y-1">
-                <li>This is a temporary testing setup. Usernames and passwords are <strong class="text-red-800">not hashed</strong> in this version of the server.</li>
-                <li>While your data is stored securely on my end, please use a <strong class="text-red-800">temporary password</strong> or one you don’t care about. <strong class="text-red-800">Do not reuse</strong> passwords you use elsewhere.</li>
-                <li><strong class="text-red-800">NO</strong>, this is <em>not</em> the official <em>Story of Alicia</em> server — it’s a personal test server hosted by me.</li>
-                <li><strong class="text-red-800">YES</strong>, it’s buggy. Expect crashes, shutdowns, and potential data loss. This is far from ready for a stable release. If something breaks or the server crashes, feel free to message me — I’ll check the logs and restart it if needed.</li>
-            </ul>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="index.html" class="nav-button active">Register</a>
+            <a href="commands.html" class="nav-button">Commands</a>
+            <a href="news.html" class="nav-button">News</a>
         </div>
 
-        <form id="userRegistrationForm" class="space-y-6">
-            <div>
-                <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username:</label>
-                <input type="text" id="username" name="username" placeholder="Enter your desired username" class="focus:ring-indigo-500 focus:border-indigo-500" required>
-            </div>
-            <div>
-                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password (Token):</label>
-                <input type="password" id="password" name="password" placeholder="Choose a password" class="focus:ring-indigo-500 focus:border-indigo-500" required>
-            </div>
-            
-            <!-- CAPTCHA Section -->
-            <div>
-                <label for="captchaInput" class="block text-sm font-medium text-gray-700 mb-1">Captcha:</label>
-                <div class="flex items-center space-x-4 mb-2">
-                    <span id="captchaDisplay" title="The 4 numbers to enter"></span>
-                    <button type="button" id="refreshCaptchaBtn" class="btn-secondary text-sm font-medium py-2 px-3">New Code</button>
-                </div>
-                <input type="text" id="captchaInput" name="captchaInput" placeholder="Enter the 4 numbers above" class="focus:ring-indigo-500 focus:border-indigo-500" required autocomplete="off">
-            </div>
-
-            <button type="submit" class="btn-primary w-full shadow-md">Register User</button>
-        </form>
-
-        <div id="messageContainer" class="mt-6 p-4 rounded-lg text-center hidden">
-            <p id="messageText" class="font-medium"></p>
-        </div>
-
-        <div class="info-box">
-            <h2 class="text-xl font-semibold text-gray-700 mb-4">Quick Start Tutorial</h2>
-            <p class="text-gray-600 text-sm mb-2">1. Download the game files from <a href="https://drive.proton.me/urls/MWGXF9C4W8#eg3bDT0wlVMA" class="text-indigo-600 font-medium hover:underline" target="_blank" rel="noopener noreferrer">here</a>.</p>
-            <p class="text-gray-600 text-sm mb-2">2. Unpack the archive to a location of your choice.</p>
-            <p class="text-gray-600 text-sm mb-2">3. Open <code>settings.json</code> and enter your registered username and password.</p>
-            <p class="text-gray-600 text-sm mb-2">4. Save the file.</p>
-            <p class="text-gray-600 text-sm mb-2">5. Launch <code>alicia-launcher-cli.exe</code>.</p>
-            <p class="text-gray-600 text-sm">6. Enjoy!</p>
-        </div>
-
-        <div class="info-box">
-            <h2 class="text-xl font-semibold text-gray-700 mb-4">Available Chat Commands</h2>
-            <p class="text-gray-600 text-sm mb-4">You can use these commands in the game chat (Ranch Chat) after logging in:</p>
-            
-            <p class="font-medium text-gray-700 mb-2">Give Item:</p>
-            <code class="bg-indigo-100 text-gray-700">//give item <count> <item ID></code>
-            <p class="text-gray-600 text-sm mb-4">
-                Easily generate this command using the helpful website: 
-                <a href="https://samuelll41.github.io/alicia/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 font-medium">samuelll41.github.io/alicia/</a>
+        <div class="bg-white p-8 rounded-lg shadow-xl border border-gray-200">
+            <h1 class="text-3xl font-bold text-center text-gray-800 mb-4">Chrommd's test server</h1>
+            <p class="text-center text-gray-600 mb-8">
+                This is a for-fun test server running the latest SoA server build. Anyone is welcome to join! A setup guide and useful in-game commands are available below. Enjoy your stay!
             </p>
 
-            <p class="font-medium text-gray-700 mb-2">Horse Parameters:</p>
-            <code class="bg-indigo-100 text-gray-700">//horse parts <skinId> <facetd> <maneId> <tailId></code>
-            <p class="text-gray-600 text-sm">
-                This command allows you to customize your horse's appearance and attributes.
-            </p>
-        </div>
-
-        <div class="info-box">
-            <h2 class="text-xl font-semibold text-gray-700 mb-4">Horse Command Generator</h2>
-            <p class="text-gray-600 text-sm mb-4">Select your desired horse parameters to generate the chat command:</p>
-
-            <div class="space-y-4 mb-6">
-                <div>
-                    <label for="skinId" class="block text-sm font-medium text-gray-700 mb-1">Coat (Skin ID):</label>
-                    <select id="skinId" class="focus:ring-indigo-500 focus:border-indigo-500">
-                        <option value="1">1 - Chestnut</option>
-                        <option value="2">2 - Bay</option>
-                        <option value="3">3 - Champagne Sabino</option>
-                        <option value="4">4 - Chestnut Stockings</option>
-                        <option value="5">5 - Buckskin</option>
-                        <option value="6">6 - Champagne</option>
-                        <option value="7">7 - Leopard Appaloosa</option>
-                        <option value="8">8 - Blanket Appaloosa</option>
-                        <option value="9">9 - White Grey</option>
-                        <option value="16">16 - Brown Sabino</option>
-                        <option value="17">17 - Amber Cream</option>
-                        <option value="18">18 - Mealy Bay</option>
-                        <option value="19">19 - Black Sabino</option>
-                        <option value="20">20 - Dapple Bay</option>
-                        <option value="10">10 - Dapple Grey</option>
-                        <option value="11">11 - Chestnut Pinto</option>
-                        <option value="12">12 - Sooty Bay</option>
-                        <option value="13">13 - Palomino</option>
-                        <option value="14">14 - Black Pinto</option>
-                        <option value="15">15 - Black</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="maneId" class="block text-sm font-medium text-gray-700 mb-1">Mane ID:</label>
-                    <select id="maneId" class="focus:ring-indigo-500 focus:border-indigo-500">
-                        <option value="1">1 - Black Medium Short</option>
-                        <option value="2">2 - White Medium Short</option>
-                        <option value="3">3 - Dark Brown? Medium Short</option>
-                        <option value="4">4 - Dark Brown? Medium Short (Again?)</option>
-                        <option value="5">5 - Medium Short Grey</option>
-                        <option value="6">6 - Medium Long Black</option>
-                        <option value="7">7 - Medium Long White</option>
-                        <option value="8">8 - Medium Long Brown</option>
-                        <option value="9">9 - Medium Long Dark Brown</option>
-                        <option value="16">16 - Short Black</option>
-                        <option value="17">17 - Short White</option>
-                        <option value="18">18 - Short Grey</option>
-                        <option value="19">19 - Short Dark Brown</option>
-                        <option value="20">20 - Short Grey (Again?)</option>
-                        <option value="21">21 - Extremely Short Black</option>
-                        <option value="22">22 - Extremely Short White</option>
-                        <option value="23">23 - Extremely Short Dark Brown</option>
-                        <option value="24">24 - Extremely Short Brown</option>
-                        <option value="25">25 - Extremely Short Brown (Again?)</option>
-                        <option value="32">32 - Long White</option>
-                        <option value="33">33 - Long Brown</option>
-                        <option value="34">34 - Long Dark Brown</option>
-                        <option value="35">35 - Long Gray</option>
-                        <option value="31">31 - Long Black</option>
-                        <option value="36">36 - Curly Black</option>
-                        <option value="37">37 - Curly White</option>
-                        <option value="38">38 - Curly Brown</option>
-                        <option value="39">39 - Curly Dark Brown</option>
-                        <option value="40">40 - Curly Gray</option>
-                        <option value="26">26 - Black Spiky</option>
-                        <option value="27">27 - White Spiky</option>
-                        <option value="28">28 - Brown Spiky</option>
-                        <option value="29">29 - Dark Brown Spiky</option>
-                        <option value="30">30 - Gray Spiky</option>
-                        <option value="11">11 - Shaved Black</option>
-                        <option value="12">12 - Shaved White</option>
-                        <option value="13">13 - Shaved Brown</option>
-                        <option value="14">14 - Shaved Dark Brown</option>
-                        <option value="15">15 - Shaved Gray</option>
-                        <option value="0">0 - No Mane</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="tailId" class="block text-sm font-medium text-gray-700 mb-1">Tail ID:</label>
-                    <select id="tailId" class="focus:ring-indigo-500 focus:border-indigo-500">
-                        <option value="1">1 - Medium Black</option>
-                        <option value="2">2 - Medium White</option>
-                        <option value="3">3 - Medium (Dark?) Brown</option>
-                        <option value="4">4 - Medium Dark Brown</option>
-                        <option value="5">5 - Long Thick Grey</option>
-                        <option value="6">6 - Long Thick Black</option>
-                        <option value="7">7 - Long Thick White</option>
-                        <option value="8">8 - Long Thick Brown</option>
-                        <option value="9">9 - Long Thick Dark Brown</option>
-                        <option value="16">16 - Long Thin Black</option>
-                        <option value="10">10 - Long Thick Grey (Repeat)</option>
-                        <option value="11">11 - Black Cropped Tail</option>
-                        <option value="12">12 - White Cropped Tail</option>
-                        <option value="13">13 - Dark Brown Cropped Tail</option>
-                        <option value="14">14 - Repeat of 13?</option>
-                        <option value="15">15 - Cropped Gray</option>
-                        <option value="17">17 - Long Thin White</option>
-                        <option value="18">18 - Long Thin Brown</option>
-                        <option value="19">19 - Long Thin Dark Brown</option>
-                        <option value="20">20 - Long Thin Grey</option>
-                        <option value="21">21 - Short Thin Black</option>
-                        <option value="22">22 - Short Thin White</option>
-                        <option value="23">23 - Short Thin Brown</option>
-                        <option value="24">24 - Short Thin Dark Brown</option>
-                        <option value="25">25 - Short Thin Grey</option>
-                        <option value="26">26 - Curly Black</option>
-                        <option value="27">27 - Curly White</option>
-                        <option value="28">28 - Curly Brown</option>
-                        <option value="29">29 - Curly Dark Brown</option>
-                        <option value="30">30 - Curly Gray</option>
-                        <option value="11">11 - Shaved Black</option>
-                        <option value="12">12 - Shaved White</option>
-                        <option value="13">13 - Shaved Brown</option>
-                        <option value="14">14 - Shaved Dark Brown</option>
-                        <option value="15">15 - Shaved Gray</option>
-                        <option value="0">0 - No Tail</option>
-                    </select>
-                </div>
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-8" role="alert">
+                <strong class="font-bold">IMPORTANT WARNING – Temporary Test Server</strong>
+                <ul class="list-disc list-inside text-sm mt-2 space-y-1">
+                    <li>This is a temporary testing setup. Usernames and passwords are <strong class="text-red-800">not hashed</strong> in this version of the server.</li>
+                    <li>While your data is stored securely on my end, please use a <strong class="text-red-800">temporary password</strong> or one you don’t care about. <strong class="text-red-800">Do not reuse</strong> passwords you use elsewhere.</li>
+                    <li><strong class="text-red-800">NO</strong>, this is <em>not</em> the official <em>Story of Alicia</em> server — it’s a personal test server hosted by me.</li>
+                    <li><strong class="text-red-800">YES</strong>, it’s buggy. Expect crashes, shutdowns, and potential data loss. This is far from ready for a stable release. If something breaks or the server crashes, feel free to message me — I’ll check the logs and restart it if needed.</li>
+                </ul>
             </div>
 
-            <label for="generatedCommand" class="block text-sm font-medium text-gray-700 mb-1">Generated Command:</label>
-            <div class="flex space-x-2">
-                <input type="text" id="generatedCommand" class="flex-grow bg-gray-100 text-gray-700 font-mono" readonly>
-                <button type="button" id="copyCommandBtn" class="btn-secondary flex-shrink-0">Copy</button>
+            <form id="userRegistrationForm" class="space-y-6">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username:</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your desired username" class="focus:ring-indigo-500 focus:border-indigo-500" required>
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password (Token):</label>
+                    <input type="password" id="password" name="password" placeholder="Choose a password" class="focus:ring-indigo-500 focus:border-indigo-500" required>
+                </div>
+                
+                <div>
+                    <label for="captchaInput" class="block text-sm font-medium text-gray-700 mb-1">Captcha:</label>
+                    <div class="flex items-center space-x-4 mb-2">
+                        <span id="captchaDisplay" title="The 4 numbers to enter"></span>
+                        <button type="button" id="refreshCaptchaBtn" class="btn-secondary text-sm font-medium py-2 px-3">New Code</button>
+                    </div>
+                    <input type="text" id="captchaInput" name="captchaInput" placeholder="Enter the 4 numbers above" class="focus:ring-indigo-500 focus:border-indigo-500" required autocomplete="off">
+                </div>
+
+                <button type="submit" class="btn-primary w-full shadow-md">Register User</button>
+            </form>
+
+            <div id="messageContainer" class="mt-6 p-4 rounded-lg text-center hidden">
+                <p id="messageText" class="font-medium"></p>
             </div>
-            <p id="copyMessage" class="copy-message hidden">Copied!</p>
+
+            <div class="info-box">
+                <h2 class="text-xl font-semibold text-gray-700 mb-4">Quick Start Tutorial</h2>
+                <p class="text-gray-600 text-sm mb-2">1. Download the game files from <a href="https://drive.proton.me/urls/MWGXF9C4W8#eg3bDT0wlVMA" class="text-indigo-600 font-medium hover:underline" target="_blank" rel="noopener noreferrer">here</a>.</p>
+                <p class="text-gray-600 text-sm mb-2">2. Unpack the archive to a location of your choice.</p>
+                <p class="text-gray-600 text-sm mb-2">3. Open <code>settings.json</code> and enter your registered username and password.</p>
+                <p class="text-gray-600 text-sm mb-2">4. Save the file.</p>
+                <p class="text-gray-600 text-sm mb-2">5. Launch <code>alicia-launcher-cli.exe</code>.</p>
+                <p class="text-gray-600 text-sm mb-2">6. Enjoy!</p>
+                <p class="text-gray-600 text-sm mt-4">For those who need visual help, a video tutorial is available <a href="https://www.youtube.com/shorts/1ieUm9m5n20" class="text-indigo-600 font-medium hover:underline" target="_blank" rel="noopener noreferrer">here</a>.</p>
+            </div>
         </div>
     </div>
 
     <script>
-        // --- CAPTCHA Logic ---
         const captchaDisplay = document.getElementById('captchaDisplay');
         const captchaInput = document.getElementById('captchaInput');
         const refreshCaptchaBtn = document.getElementById('refreshCaptchaBtn');
         let correctCaptcha = '';
 
         function generateCaptcha() {
-            // Generate a random 4-digit number
             const num = Math.floor(1000 + Math.random() * 9000);
             correctCaptcha = num.toString();
             captchaDisplay.textContent = correctCaptcha;
-            captchaInput.value = ''; // Clear previous input
+            captchaInput.value = '';
         }
 
         refreshCaptchaBtn.addEventListener('click', generateCaptcha);
         
-        // --- Message Display Helper ---
-        function displayMessage(text, type = 'info') { // type can be 'success', 'error', 'warning', 'info'
+        function displayMessage(text, type = 'info') {
             const messageContainer = document.getElementById('messageContainer');
             const messageText = document.getElementById('messageText');
 
-            // Clear previous classes and ensure it's visible
             messageContainer.className = 'mt-6 p-4 rounded-lg text-center';
-
+            messageContainer.classList.remove('hidden');
+            
             messageText.textContent = text;
             
-            // Apply new classes based on type
             switch (type) {
                 case 'success':
                     messageContainer.classList.add('bg-green-100', 'text-green-800');
@@ -367,34 +254,29 @@
             }
         }
 
-        // --- User Registration Form Logic ---
         document.getElementById('userRegistrationForm').addEventListener('submit', async function(event) {
-            event.preventDefault(); // Prevent default form submission
+            event.preventDefault();
 
-            // --- CAPTCHA Validation ---
             if (captchaInput.value !== correctCaptcha) {
                 displayMessage('Incorrect CAPTCHA. Please try again.', 'warning');
-                generateCaptcha(); // Generate a new captcha for the user
+                generateCaptcha();
                 return;
             }
 
             let username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value;
 
-            // Client-side validation: empty fields
             if (!username || !password) {
                 displayMessage('Please enter both username and password.', 'warning');
                 return;
             }
 
-            // Client-side validation: username character pattern (matches backend)
             const usernameRegex = /^[a-zA-Z0-9]+$/;
             if (!usernameRegex.test(username)) {
                 displayMessage('Username must contain only standard letters and numbers (A-Z, a-z, 0-9).', 'warning');
                 return;
             }
 
-            // Client-side validation: minimum password length
             const MIN_PASSWORD_LENGTH = 3;
             if (password.length < MIN_PASSWORD_LENGTH) {
                 displayMessage(`Password must be at least ${MIN_PASSWORD_LENGTH} characters long.`, 'warning');
@@ -402,7 +284,7 @@
             }
 
             const originalUsername = username;
-            username = username.toLowerCase(); // Convert username to lowercase for backend consistency
+            username = username.toLowerCase();
 
             if (originalUsername !== username) {
                 displayMessage(`Username converted to lowercase: "${username}". You can set your in-game name during character creation!`, 'info');
@@ -449,45 +331,9 @@
                 displayMessage('Network error or server is not reachable. Please check the server address, server status, or firewall settings.', 'error');
             }
             
-            // Generate a new captcha after every registration attempt (success or fail)
             generateCaptcha();
         }
 
-        // --- Horse Command Generator Logic ---
-        const skinIdSelect = document.getElementById('skinId');
-        const maneIdSelect = document.getElementById('maneId');
-        const tailIdSelect = document.getElementById('tailId');
-        const generatedCommandInput = document.getElementById('generatedCommand');
-        const copyCommandBtn = document.getElementById('copyCommandBtn');
-        const copyMessageElement = document.getElementById('copyMessage');
-
-        function generateHorseCommand() {
-            const skinId = skinIdSelect.value;
-            const maneId = maneIdSelect.value;
-            const tailId = tailIdSelect.value;
-            const faceId = 0; // As per instructions, faceId is always 0
-
-            const command = `//horse parts ${skinId} ${faceId} ${maneId} ${tailId}`;
-            generatedCommandInput.value = command;
-        }
-
-        function copyCommand() {
-            generatedCommandInput.select();
-            document.execCommand('copy');
-            copyMessageElement.classList.remove('hidden');
-            setTimeout(() => {
-                copyMessageElement.classList.add('hidden');
-            }, 2000); // Hide "Copied!" message after 2 seconds
-        }
-
-        // Add event listeners
-        skinIdSelect.addEventListener('change', generateHorseCommand);
-        maneIdSelect.addEventListener('change', generateHorseCommand);
-        tailIdSelect.addEventListener('change', generateHorseCommand);
-        copyCommandBtn.addEventListener('click', copyCommand);
-
-        // Initialize command and CAPTCHA on page load
-        generateHorseCommand();
         generateCaptcha();
     </script>
 </body>
