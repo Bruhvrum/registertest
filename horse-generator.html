@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrommd's test server - Horse Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+        }
+        .container {
+            max-width: 600px;
+        }
+        select {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: white;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9' /%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.7rem center;
+            background-size: 1.5em 1.5em;
+        }
+        button {
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        button:hover {
+            transform: translateY(-1px);
+        }
+        .btn-secondary {
+            background-color: #e0e7ff;
+            color: #4338ca;
+            border: 1px solid #c7d2fe;
+        }
+        .btn-secondary:hover {
+            background-color: #c7d2fe;
+        }
+        .info-box {
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+        .copy-message {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: #10b981;
+            font-weight: 500;
+            text-align: center;
+        }
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            padding: 0.75rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            border: 1px solid #e5e7eb;
+        }
+        .nav-button {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            text-decoration: none;
+            color: #374151;
+            background-color: #f9fafb;
+            border: 1px solid #d1d5db;
+            transition: all 0.2s;
+        }
+        .nav-button:hover {
+            background-color: #f3f4f6;
+            border-color: #9ca3af;
+            transform: translateY(-1px);
+        }
+        .nav-button.active {
+            background-color: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="container">
+        <div class="nav-bar">
+            <a href="index.html" class="nav-button">Register</a>
+            <a href="commands.html" class="nav-button">Commands</a>
+            <a href="horse-generator.html" class="nav-button active">Horse Generator</a>
+            <a href="news.html" class="nav-button">News</a>
+        </div>
+
+        <div class="bg-white p-8 rounded-lg shadow-xl border border-gray-200">
+            <div class="info-box">
+                <h2 class="text-xl font-semibold text-gray-700 mb-4 text-center">Horse Command Generator</h2>
+                <p class="text-gray-600 text-sm mb-4 text-center">Select your desired horse parameters to generate the chat command.</p>
+    
+                <div class="space-y-4 mb-6">
+                    <div>
+                        <label for="skinId" class="block text-sm font-medium text-gray-700 mb-1">Coat (Skin ID):</label>
+                        <select id="skinId" class="focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="1">1 - Chestnut</option>
+                            <option value="2">2 - Bay</option>
+                            <option value="3">3 - Champagne Sabino</option>
+                            <option value="4">4 - Chestnut Stockings</option>
+                            <option value="5">5 - Buckskin</option>
+                            <option value="6">6 - Champagne</option>
+                            <option value="7">7 - Leopard Appaloosa</option>
+                            <option value="8">8 - Blanket Appaloosa</option>
+                            <option value="9">9 - White Grey</option>
+                            <option value="10">10 - Dapple Grey</option>
+                            <option value="11">11 - Chestnut Pinto</option>
+                            <option value="12">12 - Sooty Bay</option>
+                            <option value="13">13 - Palomino</option>
+                            <option value="14">14 - Black Pinto</option>
+                            <option value="15">15 - Black</option>
+                            <option value="16">16 - Brown Sabino</option>
+                            <option value="17">17 - Amber Cream</option>
+                            <option value="18">18 - Mealy Bay</option>
+                            <option value="19">19 - Black Sabino</option>
+                            <option value="20">20 - Dapple Bay</option>
+                        </select>
+                    </div>
+    
+                    <div>
+                        <label for="maneId" class="block text-sm font-medium text-gray-700 mb-1">Mane ID:</label>
+                        <select id="maneId" class="focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="0">0 - No Mane</option>
+                            <option value="1">1 - Black Medium Short</option>
+                            <option value="2">2 - White Medium Short</option>
+                            <option value="3">3 - Dark Brown? Medium Short</option>
+                            <option value="4">4 - Dark Brown? Medium Short (Again?)</option>
+                            <option value="5">5 - Medium Short Grey</option>
+                            <option value="6">6 - Medium Long Black</option>
+                            <option value="7">7 - Medium Long White</option>
+                            <option value="8">8 - Medium Long Brown</option>
+                            <option value="9">9 - Medium Long Dark Brown</option>
+                            <option value="11">11 - Shaved Black</option>
+                            <option value="12">12 - Shaved White</option>
+                            <option value="13">13 - Shaved Brown</option>
+                            <option value="14">14 - Shaved Dark Brown</option>
+                            <option value="15">15 - Shaved Gray</option>
+                            <option value="16">16 - Short Black</option>
+                            <option value="17">17 - Short White</option>
+                            <option value="18">18 - Short Grey</option>
+                            <option value="19">19 - Short Dark Brown</option>
+                            <option value="20">20 - Short Grey (Again?)</option>
+                            <option value="21">21 - Extremely Short Black</option>
+                            <option value="22">22 - Extremely Short White</option>
+                            <option value="23">23 - Extremely Short Dark Brown</option>
+                            <option value="24">24 - Extremely Short Brown</option>
+                            <option value="25">25 - Extremely Short Brown (Again?)</option>
+                            <option value="26">26 - Black Spiky</option>
+                            <option value="27">27 - White Spiky</option>
+                            <option value="28">28 - Brown Spiky</option>
+                            <option value="29">29 - Dark Brown Spiky</option>
+                            <option value="30">30 - Gray Spiky</option>
+                            <option value="31">31 - Long Black</option>
+                            <option value="32">32 - Long White</option>
+                            <option value="33">33 - Long Brown</option>
+                            <option value="34">34 - Long Dark Brown</option>
+                            <option value="35">35 - Long Gray</option>
+                            <option value="36">36 - Curly Black</option>
+                            <option value="37">37 - Curly White</option>
+                            <option value="38">38 - Curly Brown</option>
+                            <option value="39">39 - Curly Dark Brown</option>
+                            <option value="40">40 - Curly Gray</option>
+                        </select>
+                    </div>
+    
+                    <div>
+                        <label for="tailId" class="block text-sm font-medium text-gray-700 mb-1">Tail ID:</label>
+                        <select id="tailId" class="focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="0">0 - No Tail</option>
+                            <option value="1">1 - Medium Black</option>
+                            <option value="2">2 - Medium White</option>
+                            <option value="3">3 - Medium (Dark?) Brown</option>
+                            <option value="4">4 - Medium Dark Brown</option>
+                            <option value="5">5 - Long Thick Grey</option>
+                            <option value="6">6 - Long Thick Black</option>
+                            <option value="7">7 - Long Thick White</option>
+                            <option value="8">8 - Long Thick Brown</option>
+                            <option value="9">9 - Long Thick Dark Brown</option>
+                            <option value="10">10 - Long Thick Grey (Repeat)</option>
+                            <option value="11">11 - Black Cropped Tail</option>
+                            <option value="12">12 - White Cropped Tail</option>
+                            <option value="13">13 - Dark Brown Cropped Tail</option>
+                            <option value="14">14 - Repeat of 13?</option>
+                            <option value="15">15 - Cropped Gray</option>
+                            <option value="16">16 - Long Thin Black</option>
+                            <option value="17">17 - Long Thin White</option>
+                            <option value="18">18 - Long Thin Brown</option>
+                            <option value="19">19 - Long Thin Dark Brown</option>
+                            <option value="20">20 - Long Thin Grey</option>
+                            <option value="21">21 - Short Thin Black</option>
+                            <option value="22">22 - Short Thin White</option>
+                            <option value="23">23 - Short Thin Brown</option>
+                            <option value="24">24 - Short Thin Dark Brown</option>
+                            <option value="25">25 - Short Thin Grey</option>
+                            <option value="26">26 - Curly Black</option>
+                            <option value="27">27 - Curly White</option>
+                            <option value="28">28 - Curly Brown</option>
+                            <option value="29">29 - Curly Dark Brown</option>
+                            <option value="30">30 - Curly Gray</option>
+                        </select>
+                    </div>
+                </div>
+    
+                <label for="generatedCommand" class="block text-sm font-medium text-gray-700 mb-1">Generated Command:</label>
+                <div class="flex space-x-2">
+                    <input type="text" id="generatedCommand" class="flex-grow bg-gray-100 text-gray-700 font-mono rounded-md border-gray-300" readonly>
+                    <button type="button" id="copyCommandBtn" class="btn-secondary flex-shrink-0">Copy</button>
+                </div>
+                <p id="copyMessage" class="copy-message hidden">Copied!</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const skinIdSelect = document.getElementById('skinId');
+        const maneIdSelect = document.getElementById('maneId');
+        const tailIdSelect = document.getElementById('tailId');
+        const generatedCommandInput = document.getElementById('generatedCommand');
+        const copyCommandBtn = document.getElementById('copyCommandBtn');
+        const copyMessageElement = document.getElementById('copyMessage');
+
+        function generateHorseCommand() {
+            const skinId = skinIdSelect.value;
+            const maneId = maneIdSelect.value;
+            const tailId = tailIdSelect.value;
+            const faceId = 0;
+
+            const command = `//horse parts ${skinId} ${faceId} ${maneId} ${tailId}`;
+            generatedCommandInput.value = command;
+        }
+
+        function copyCommand() {
+            generatedCommandInput.select();
+            document.execCommand('copy');
+            copyMessageElement.classList.remove('hidden');
+            setTimeout(() => {
+                copyMessageElement.classList.add('hidden');
+            }, 2000);
+        }
+
+        skinIdSelect.addEventListener('change', generateHorseCommand);
+        maneIdSelect.addEventListener('change', generateHorseCommand);
+        tailIdSelect.addEventListener('change', generateHorseCommand);
+        copyCommandBtn.addEventListener('click', copyCommand);
+
+        generateHorseCommand();
+    </script>
+</body>
+</html>
