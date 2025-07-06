@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrommd's test server - News</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            padding: 0.75rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            border: 1px solid #e5e7eb;
+        }
+        .nav-button {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            text-decoration: none;
+            color: #374151;
+            background-color: #f9fafb;
+            border: 1px solid #d1d5db;
+            transition: all 0.2s;
+        }
+        .nav-button:hover {
+            background-color: #f3f4f6;
+            border-color: #9ca3af;
+            transform: translateY(-1px);
+        }
+        .nav-button.active {
+            background-color: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
+        }
+        .news-item {
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+        .news-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+        .news-header:hover {
+            background-color: #f3f4f6;
+        }
+        .news-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+        .news-header .icon {
+            transition: transform 0.3s ease-in-out;
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+        .news-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            padding: 0 1.5rem;
+            color: #374151;
+            font-size: 1rem;
+            line-height: 1.75;
+        }
+        .news-content.open {
+            padding: 0 1.5rem 1.5rem;
+        }
+        .news-content p, .news-content ul {
+            margin-bottom: 1.25rem;
+        }
+        .news-content ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+        .news-content li {
+            margin-bottom: 0.75rem;
+        }
+        .news-content strong {
+            font-weight: 600;
+            color: #111827;
+        }
+        .news-content a {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .news-content a:hover {
+            text-decoration: underline;
+        }
+        .disclaimer {
+            background-color: #fef2f2;
+            border-left: 4px solid #ef4444;
+            padding: 1rem;
+            margin-top: 2rem;
+            border-radius: 4px;
+        }
+        .disclaimer p {
+            margin-bottom: 0;
+            color: #b91c1c;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="container">
+        <div class="nav-bar">
+            <a href="index.html" class="nav-button">Register</a>
+            <a href="commands.html" class="nav-button">Commands</a>
+            <a href="news.html" class="nav-button active">News</a>
+        </div>
+
+        <div class="bg-white p-8 rounded-lg shadow-xl border border-gray-200">
+            <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Server News & Updates</h1>
+
+            <div class="news-item">
+                <div class="news-header">
+                    <h2>Server Changelog: July 6th</h2>
+                    <svg class="icon w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="news-content">
+                    <p>Hello everyone,</p>
+                    <p>A new patch has been deployed to address a critical bug.</p>
+                    <ul>
+                        <li><strong>Bug Fix:</strong> An issue preventing data from being saved correctly for players with Korean characters in their usernames has been resolved.</li>
+                    </ul>
+                    <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Important Notice Regarding Data Wipes</h3>
+                    <p>Unfortunately, to implement this fix, a full data wipe was necessary. We apologize for the inconvenience and appreciate your understanding as we work to improve server stability. As the project evolves, further data wipes will be required periodically to support future updates.</p>
+                    <div class="disclaimer">
+                        <p><strong>Disclaimer:</strong> This server is a test environment. As such, it is not stable and users may encounter crashes, bugs, and other unexpected issues.</p>
+                    </div>
+                    <p class="mt-6">Thank you for your understanding.</p>
+                </div>
+            </div>
+
+            <div class="news-item">
+                <div class="news-header">
+                    <h2>Server Changelog: July 5th</h2>
+                    <svg class="icon w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="news-content">
+                    <p>Hello everyone,</p>
+                    <p>A small server patch has been deployed to address several issues and introduce a new feature. Please see the summary of changes below.</p>
+                    <ul>
+                        <li><strong>Ranch Visits:</strong> No more spending hours searching for your friends' ranches thanks to RNG! You can now use the new command <code>//visit &lt;player&gt;</code> to set your next portal destination directly to their ranch. The system reverts to random visits afterwards, so it's a one-time teleport to your friend.</li>
+                        <li><strong>General Fixes:</strong> This update also includes various background bug fixes and server stability improvements.</li>
+                    </ul>
+                    <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Important Notice Regarding Data Wipes</h3>
+                    <p>Please be advised that all player data has been wiped. This was a necessary step to accommodate ongoing development and recent server-side changes. As the project evolves, further data wipes will be required periodically to support future updates.</p>
+                    <div class="disclaimer">
+                        <p><strong>Disclaimer:</strong> This server is a test environment. As such, it is not stable and users may encounter crashes, bugs, and other unexpected issues.</p>
+                    </div>
+                    <p class="mt-6">Thank you for your understanding.</p>
+                </div>
+            </div>
+
+            <div class="news-item">
+                <div class="news-header">
+                    <h2>Server Changelog: July 3rd</h2>
+                    <svg class="icon w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="news-content">
+                    <p>Hello everyone,</p>
+                    <p>A small server update has been deployed. Please see the summary of changes below.</p>
+                    <ul>
+                        <li><strong>Randomized Horses:</strong> Upon character creation, you will now be assigned three random horses that you can switch between. You can also get a new random horse at any time by using the command <code>//horse randomize</code> in the ranch chat, which requires a client restart to take effect.</li>
+                        <li><strong>Character Voices:</strong> An issue has been resolved where character voices did not match the selected gender. This is now corrected.</li>
+                        <li><strong>Emblem Customization:</strong> A new feature has been implemented allowing emblem customization. You can change your emblem using the command <code>//emblem &lt;ID&gt;</code> in the ranch chat, followed by a client restart. A complete list of emblem IDs and a command generator can be found on SAMUELLL's website in the emblems section: <a href="https://samuelll41.github.io/alicia/" target="_blank" rel="noopener noreferrer">samuelll41.github.io/alicia/</a></li>
+                        <li><strong>Automatic Restarts:</strong> The server is now configured to restart automatically following a crash. Please be aware that in the event of a crash, your data will most probably be lost, unless it was successfully saved prior to the incident.</li>
+                        <li><strong>General Fixes:</strong> This update also includes various background bug fixes and server stability improvements.</li>
+                    </ul>
+                    <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Important Notice Regarding Data Wipes</h3>
+                    <p>Please be advised that all player data has been wiped. This was a necessary step to accommodate ongoing development and recent server-side changes. As the project evolves, further data wipes will be required periodically to support future updates.</p>
+                    <div class="disclaimer">
+                        <p><strong>Disclaimer:</strong> This server is a test environment. As such, it is not stable and users may encounter crashes, bugs, and other unexpected issues.</p>
+                    </div>
+                    <p class="mt-6">Thank you for your understanding.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.news-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('.icon');
+
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    content.classList.remove('open');
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    document.querySelectorAll('.news-content').forEach(item => {
+                        item.style.maxHeight = null;
+                        item.classList.remove('open');
+                        item.previousElementSibling.querySelector('.icon').style.transform = 'rotate(0deg)';
+                    });
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    content.classList.add('open');
+                    icon.style.transform = 'rotate(180deg)';
+                } 
+            });
+        });
+    </script>
+</body>
+</html>
