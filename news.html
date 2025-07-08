@@ -17,6 +17,7 @@
         .nav-bar {
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
             gap: 0.5rem;
             margin-bottom: 2rem;
             padding: 0.75rem;
@@ -100,6 +101,15 @@
             font-weight: 600;
             color: #111827;
         }
+        .news-content code {
+            background-color: #eef2ff;
+            color: #4338ca;
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            border-radius: 3px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
         .news-content a {
             color: #4f46e5;
             text-decoration: none;
@@ -136,21 +146,44 @@
 
             <div class="news-item">
                 <div class="news-header">
+                    <h2>Server Changelog: July 8th</h2>
+                    <svg class="icon w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="news-content">
+                    <p>Hello everyone,</p>
+                    <p>A new server patch has been deployed, incorporating the latest updates and stability improvements from the latest commits to the master branch. Please see the summary of changes below.</p>
+                    <ul>
+                        <li><strong>Horse Renaming Fix:</strong> Horses without a name can now be properly renamed. The server now correctly handles the game's feature to prompt for a rename when a horse's name is blank.</li>
+                        <li><strong>Visit Preference Fix:</strong> Corrected an issue with the <code>//visit</code> command where the visit preference was not resetting after use.</li>
+                        <li><strong>Backend YAML Support:</strong> Added a new library to support YAML configurations, improving server-side data management for future updates.</li>
+                        <li><strong>Data Director Fixes:</strong> Implemented several bug fixes and stability improvements to the data director.</li>
+                    </ul>
+                    <h3 class="text-xl font-bold text-green-700 mt-6 mb-2">Data Integrity Notice</h3>
+                    <p>No data wipe was required for this update. All player data remains intact.</p>
+                    <div class="disclaimer">
+                        <p><strong>Disclaimer:</strong> This server is a test environment. As such, it is not stable and users may encounter crashes, bugs, and other unexpected issues.</p>
+                        <p class="mt-4">Thank you for your understanding.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-header">
                     <h2>Server Changelog: July 6th</h2>
                     <svg class="icon w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="news-content">
                     <p>Hello everyone,</p>
-                    <p>A new patch has been deployed to address a critical bug.</p>
+                    <p>A new server patch has been deployed, incorporating the latest updates and stability improvements from the latest commits to the master branch. Please see the summary of changes below.</p>
                     <ul>
-                        <li><strong>Bug Fix:</strong> An issue preventing data from being saved correctly for players with Korean characters in their usernames has been resolved.</li>
+                        <li><strong>Korean Username Fix:</strong> Resolved an issue preventing data from being saved correctly for players with Korean characters in their usernames.</li>
                     </ul>
                     <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Important Notice Regarding Data Wipes</h3>
                     <p>Unfortunately, to implement this fix, a full data wipe was necessary. We apologize for the inconvenience and appreciate your understanding as we work to improve server stability. As the project evolves, further data wipes will be required periodically to support future updates.</p>
                     <div class="disclaimer">
                         <p><strong>Disclaimer:</strong> This server is a test environment. As such, it is not stable and users may encounter crashes, bugs, and other unexpected issues.</p>
+                         <p class="mt-4">Thank you for your understanding.</p>
                     </div>
-                    <p class="mt-6">Thank you for your understanding.</p>
                 </div>
             </div>
 
@@ -161,17 +194,17 @@
                 </div>
                 <div class="news-content">
                     <p>Hello everyone,</p>
-                    <p>A small server patch has been deployed to address several issues and introduce a new feature. Please see the summary of changes below.</p>
+                    <p>A new server patch has been deployed, incorporating the latest updates and stability improvements from the latest commits to the master branch. Please see the summary of changes below.</p>
                     <ul>
-                        <li><strong>Ranch Visits:</strong> No more spending hours searching for your friends' ranches thanks to RNG! You can now use the new command <code>//visit &lt;player&gt;</code> to set your next portal destination directly to their ranch. The system reverts to random visits afterwards, so it's a one-time teleport to your friend.</li>
+                        <li><strong>New Command - Ranch Visits:</strong> You can now use the new command <code>//visit &lt;player&gt;</code> to set your next portal destination directly to a friend's ranch. This is a one-time teleport; the portal will revert to random visits afterwards.</li>
                         <li><strong>General Fixes:</strong> This update also includes various background bug fixes and server stability improvements.</li>
                     </ul>
                     <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Important Notice Regarding Data Wipes</h3>
                     <p>Please be advised that all player data has been wiped. This was a necessary step to accommodate ongoing development and recent server-side changes. As the project evolves, further data wipes will be required periodically to support future updates.</p>
                     <div class="disclaimer">
                         <p><strong>Disclaimer:</strong> This server is a test environment. As such, it is not stable and users may encounter crashes, bugs, and other unexpected issues.</p>
+                         <p class="mt-4">Thank you for your understanding.</p>
                     </div>
-                    <p class="mt-6">Thank you for your understanding.</p>
                 </div>
             </div>
 
@@ -182,20 +215,20 @@
                 </div>
                 <div class="news-content">
                     <p>Hello everyone,</p>
-                    <p>A small server update has been deployed. Please see the summary of changes below.</p>
+                    <p>A new server patch has been deployed, incorporating the latest updates and stability improvements from the latest commits to the master branch. Please see the summary of changes below.</p>
                     <ul>
-                        <li><strong>Randomized Horses:</strong> Upon character creation, you will now be assigned three random horses that you can switch between. You can also get a new random horse at any time by using the command <code>//horse randomize</code> in the ranch chat, which requires a client restart to take effect.</li>
-                        <li><strong>Character Voices:</strong> An issue has been resolved where character voices did not match the selected gender. This is now corrected.</li>
-                        <li><strong>Emblem Customization:</strong> A new feature has been implemented allowing emblem customization. You can change your emblem using the command <code>//emblem &lt;ID&gt;</code> in the ranch chat, followed by a client restart. A complete list of emblem IDs and a command generator can be found on SAMUELLL's website in the emblems section: <a href="https://samuelll41.github.io/alicia/" target="_blank" rel="noopener noreferrer">samuelll41.github.io/alicia/</a></li>
-                        <li><strong>Automatic Restarts:</strong> The server is now configured to restart automatically following a crash. Please be aware that in the event of a crash, your data will most probably be lost, unless it was successfully saved prior to the incident.</li>
+                        <li><strong>Randomized Horses:</strong> Upon character creation, you will now be assigned three random horses. You can also get a new random horse at any time by using the command <code>//horse randomize</code> in the ranch chat (requires a client restart).</li>
+                        <li><strong>Character Voices:</strong> An issue has been resolved where character voices did not match the selected gender.</li>
+                        <li><strong>Emblem Customization:</strong> You can now change your emblem using the command <code>//emblem &lt;ID&gt;</code> in the ranch chat (requires a client restart). A complete list of emblem IDs can be found on <a href="https://samuelll41.github.io/alicia/" target="_blank" rel="noopener noreferrer">SAMUELLL's website</a>.</li>
+                        <li><strong>Automatic Restarts:</strong> The server is now configured to restart automatically following a crash. Please be aware that in the event of a crash, data may be lost if it was not saved prior to the incident.</li>
                         <li><strong>General Fixes:</strong> This update also includes various background bug fixes and server stability improvements.</li>
                     </ul>
                     <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Important Notice Regarding Data Wipes</h3>
                     <p>Please be advised that all player data has been wiped. This was a necessary step to accommodate ongoing development and recent server-side changes. As the project evolves, further data wipes will be required periodically to support future updates.</p>
                     <div class="disclaimer">
                         <p><strong>Disclaimer:</strong> This server is a test environment. As such, it is not stable and users may encounter crashes, bugs, and other unexpected issues.</p>
+                         <p class="mt-4">Thank you for your understanding.</p>
                     </div>
-                    <p class="mt-6">Thank you for your understanding.</p>
                 </div>
             </div>
 
