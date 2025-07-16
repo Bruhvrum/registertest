@@ -161,6 +161,15 @@
             color: #b91c1c;
             font-weight: 500;
         }
+        .sub-heading {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 <body class="pt-24">
@@ -181,6 +190,48 @@
             <div class="bg-white p-8 rounded-lg shadow-xl border border-gray-200">
                 <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Server News & Updates</h1>
     
+                <div class="news-item">
+                    <div class="news-header">
+                        <h2>Server Changelog: July 16th</h2>
+                        <svg class="icon w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="news-content">
+                        <p>Hello everyone,</p>
+                        <p>Today marks a huge step forward for the server with the release of a brand new launcher and major quality-of-life updates. Please see the summary of changes below.</p>
+                        
+                        <h3 class="sub-heading">Launcher & Website Overhaul</h3>
+                        <ul>
+                            <li><strong>New Story of Alicia Launcher:</strong> The old method of joining the server is now replaced! The new launcher makes joining easier than ever. Simply download the installer from the "Play" page, register an account, and click "Start Game". Your browser will prompt you to open the launcher, which will automatically log you in and connect you to the server. (OG Alicians might remember this "Web Launch" feature—it's back and better than ever!)</li>
+                            <li><strong>Password Hashing & Auto-Conversion:</strong> The new launcher and backend system finally allow us to securely hash all passwords. For players registered before this update, your accounts have been automatically converted to the new format. You can log in with your old username and password right away!</li>
+                            <li><strong>Website Redesign:</strong> The website has been updated to support this new, streamlined login flow, providing a much easier player experience.</li>
+                        </ul>
+
+                        <h3 class="sub-heading">Server & Game Updates</h3>
+                        <ul>
+                            <li><strong>More Ranch Animals:</strong> The client packaged with the new installer includes more ambient animals on the ranch, such as deers, eagles, and the cat!</li>
+                            <li><strong>Improved English Translations:</strong> The new client also includes updated translations, converting more of the original Korean text to English.</li>
+                            <li><strong>Ranch XP Fix:</strong> An issue with Ranch XP has been patched. All buildings and structures in the Ranch Management tab should now be buildable without being incorrectly level-locked.</li>
+                            <li><strong>Horse Armor Fix:</strong> A bug that caused horse armor to expire immediately or be un-equippable has been fixed.</li>
+                            <li><strong>General Improvements:</strong> This update also includes numerous other background bug fixes and server stability improvements.</li>
+                        </ul>
+
+                        <h3 class="sub-heading">Community Tools</h3>
+                        <ul>
+                            <li><strong>Ranch Swapper Tool:</strong> For those interested in exploring, I've created a simple Python script to replace your default ranch with a race map or other special map. You can find it on GitHub here: <a href="https://github.com/Chrommd/SoA-Ranch-Swapper/releases/tag/Release" target="_blank" rel="noopener noreferrer">SoA Ranch Swapper</a>.</li>
+                        </ul>
+
+                        <h3 class="text-xl font-bold text-green-700 mt-6 mb-2">Data Integrity Notice</h3>
+                        <p>No data wipe was required for this update. All player data remains intact.</p>
+
+                        <p class="mt-6">As always, thank you for playing and testing out the server. Please report any bugs you encounter!</p>
+
+                        <div class="disclaimer">
+                            <p><strong>Disclaimer:</strong> This server is a test environment. As such, it is not stable and users may encounter crashes, bugs, and other unexpected issues.</p>
+                            <p class="mt-4">Thank you for your understanding.</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="news-item">
                     <div class="news-header">
                         <h2>Server Changelog: July 12th</h2>
