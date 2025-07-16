@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrommd's test server - Play</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            padding-top: 80px; /* Prevent content from being hidden behind the sticky nav */
+        }
+        .container {
+            max-width: 500px;
+        }
+        input[type="text"], input[type="password"] {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid #e5e7eb;
+            width: 100%;
+        }
+        .nav-group {
+            display: flex;
+            gap: 0.5rem;
+            flex: 1;
+        }
+        .nav-group.left {
+            justify-content: flex-end;
+        }
+        .nav-group.right {
+            justify-content: flex-start;
+        }
+        .nav-button {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #374151;
+            background-color: transparent;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .nav-button:hover {
+            background-color: #f3f4f6;
+            transform: none;
+        }
+        .nav-button.active {
+            color: #4f46e5;
+            border-bottom: 2px solid #4f46e5;
+            border-radius: 6px 6px 0 0;
+        }
+        .play-button {
+            padding: 10px 24px;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: white;
+            background-color: #22c55e; /* green-500 */
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        .play-button:hover {
+            background-color: #16a34a; /* green-600 */
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+        }
+        #loginButton {
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .spinner {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 2px solid #fff;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="pt-24">
+    <header class="nav-bar">
+        <div class="nav-group left">
+            <a href="register.html" class="nav-button">Register</a>
+            <a href="commands.html" class="nav-button">Commands</a>
+        </div>
+        <a href="play.html" class="play-button">Play</a>
+        <div class="nav-group right">
+            <a href="horse-generator.html" class="nav-button">Horse Generator</a>
+            <a href="news.html" class="nav-button">News</a>
+        </div>
+    </header>
+
+    <main class="flex items-center justify-center p-4">
+        <div class="container">
+            <div class="bg-white p-8 rounded-lg shadow-xl border border-gray-200">
+                <h1 class="text-3xl font-bold text-center text-gray-800 mb-4">Login & Play</h1>
+                <p class="text-center text-gray-600 mb-6">
+                    Enter your credentials to launch the game.
+                </p>
+
+                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-r-lg" role="alert">
+                  <p class="font-bold">Launcher Required</p>
+                  <p>You must download and install the Story of Alicia launcher before you can log in and start the game. <a href="https://drive.proton.me/urls/37WM215Q1R#NlzxAZSg7VFC" target="_blank" rel="noopener noreferrer" class="font-semibold underline hover:text-red-800">Download here.</a></p>
+                </div>
+
+                <form id="loginForm" class="space-y-4">
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                        <input type="text" id="username" name="username" class="focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <input type="password" id="password" name="password" class="focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+
+                    <div class="flex items-center">
+                        <input id="rememberMe" name="rememberMe" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                        <label for="rememberMe" class="ml-2 block text-sm text-gray-900">Remember my username</label>
+                    </div>
+                    
+                    <button type="submit" id="loginButton" class="bg-indigo-600 text-white hover:bg-indigo-700 !mt-6">
+                        <span id="buttonText">Start Game</span>
+                        <div id="spinner" class="spinner hidden"></div>
+                    </button>
+                </form>
+
+                <div id="messageContainer" class="mt-4 p-3 rounded-lg text-center hidden font-medium"></div>
+
+                <div class="text-center mt-6">
+                    <p class="text-sm text-gray-600">
+                        Not registered yet? 
+                        <a href="register.html" class="font-medium text-indigo-600 hover:text-indigo-500">Register here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const loginButton = document.getElementById('loginButton');
+        const buttonText = document.getElementById('buttonText');
+        const spinner = document.getElementById('spinner');
+        const messageContainer = document.getElementById('messageContainer');
+        const usernameInput = document.getElementById('username');
+        const rememberMeCheckbox = document.getElementById('rememberMe');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedUsername = localStorage.getItem('soa_username');
+            if (savedUsername) {
+                usernameInput.value = savedUsername;
+                rememberMeCheckbox.checked = true;
+            }
+        });
+
+        function setButtonState(state, message = '') {
+            messageContainer.classList.add('hidden');
+            loginButton.disabled = false;
+            loginButton.className = 'w-full flex items-center justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white transition-colors !mt-6';
+
+            switch(state) {
+                case 'loading':
+                    buttonText.textContent = 'Authenticating...';
+                    spinner.classList.remove('hidden');
+                    loginButton.disabled = true;
+                    loginButton.classList.add('bg-indigo-600');
+                    break;
+                case 'success':
+                    buttonText.textContent = 'Success! Launching...';
+                    spinner.classList.add('hidden');
+                    loginButton.disabled = true;
+                    loginButton.classList.add('bg-green-500');
+                    break;
+                case 'error':
+                    buttonText.textContent = 'Start Game';
+                    spinner.classList.add('hidden');
+                    messageContainer.textContent = message;
+                    messageContainer.classList.remove('hidden');
+                    messageContainer.classList.add('bg-red-100', 'text-red-800');
+                    loginButton.classList.add('bg-indigo-600', 'hover:bg-indigo-700');
+                    break;
+                default:
+                    buttonText.textContent = 'Start Game';
+                    spinner.classList.add('hidden');
+                    loginButton.classList.add('bg-indigo-600', 'hover:bg-indigo-700');
+            }
+        }
+
+        loginForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            setButtonState('loading');
+
+            const username = usernameInput.value;
+            const password = document.getElementById('password').value;
+
+            if (rememberMeCheckbox.checked) {
+                localStorage.setItem('soa_username', username);
+            } else {
+                localStorage.removeItem('soa_username');
+            }
+
+            // IMPORTANT: Replace this with the actual URL of your backend server.
+            const apiUrl = 'http://YOUR_SERVER_IP:5000/login';
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    setButtonState('success');
+                    const token = result.token;
+                    
+                    const protocolLink = `soa://3?username=${username}&token=${token}`;
+                    window.location.href = protocolLink;
+
+                    setTimeout(() => setButtonState('idle'), 3000);
+
+                } else {
+                    setButtonState('error', result.error || 'Invalid username or password.');
+                }
+            } catch (error) {
+                console.error('Login request failed:', error);
+                setButtonState('error', 'Network error or server is not reachable.');
+            }
+        });
+    </script>
+</body>
+</html>
