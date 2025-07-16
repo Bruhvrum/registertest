@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrommd's test server - Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            padding-top: 80px; /* Prevent content from being hidden behind the sticky nav */
+        }
+        .container {
+            max-width: 600px;
+        }
+        input[type="text"], input[type="password"] {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        button:hover {
+            transform: translateY(-1px);
+        }
+        .btn-primary {
+            background-color: #4f46e5;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #4338ca;
+        }
+        .btn-secondary {
+            background-color: #e0e7ff;
+            color: #4338ca;
+            border: 1px solid #c7d2fe;
+        }
+        .btn-secondary:hover {
+            background-color: #c7d2fe;
+        }
+        #captchaDisplay {
+            padding: 10px 15px;
+            background-color: #f3f4f6;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.25rem;
+            font-weight: bold;
+            letter-spacing: 0.3em;
+            text-decoration: line-through;
+            color: #374151;
+            user-select: none;
+        }
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid #e5e7eb;
+            width: 100%;
+        }
+        .nav-group {
+            display: flex;
+            gap: 0.5rem;
+            flex: 1;
+        }
+        .nav-group.left {
+            justify-content: flex-end;
+        }
+        .nav-group.right {
+            justify-content: flex-start;
+        }
+        .nav-button {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #374151;
+            background-color: transparent;
+            border: 2px solid transparent;
+        }
+        .nav-button:hover {
+            background-color: #f3f4f6;
+            transform: none;
+        }
+        .nav-button.active {
+            color: #4f46e5;
+            border-bottom: 2px solid #4f46e5;
+            border-radius: 6px 6px 0 0;
+        }
+        .play-button {
+            padding: 10px 24px;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: white;
+            background-color: #22c55e; /* green-500 */
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+        }
+        .play-button:hover {
+            background-color: #16a34a; /* green-600 */
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="pt-24">
+    <header class="nav-bar">
+        <div class="nav-group left">
+            <a href="register.html" class="nav-button active">Register</a>
+            <a href="commands.html" class="nav-button">Commands</a>
+        </div>
+        <a href="play.html" class="play-button">Play</a>
+        <div class="nav-group right">
+            <a href="horse-generator.html" class="nav-button">Horse Generator</a>
+            <a href="news.html" class="nav-button">News</a>
+        </div>
+    </header>
+
+    <main class="flex items-center justify-center p-4">
+        <div class="container">
+            <div class="bg-white p-8 rounded-lg shadow-xl border border-gray-200">
+                <h1 class="text-3xl font-bold text-center text-gray-800 mb-4">Create an Account</h1>
+                <p class="text-center text-gray-600 mb-8">
+                    Register a new account to join the server.
+                </p>
+    
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-8" role="alert">
+                    <strong class="font-bold">IMPORTANT WARNING – Temporary Test Server</strong>
+                    <ul class="list-disc list-inside text-sm mt-2 space-y-1">
+                        <li>While passwords are now hashed for security, please use a <strong class="text-red-800">temporary password</strong> and do not reuse passwords from other websites.</li>
+                        <li><strong class="text-red-800">NO</strong>, this is <em>not</em> the official <em>Story of Alicia</em> server — it’s a personal test server hosted by me.</li>
+                        <li><strong class="text-red-800">YES</strong>, it’s buggy. Expect crashes, shutdowns, and potential data loss. This is far from ready for a stable release. If something breaks or the server crashes, feel free to message me — I’ll check the logs and restart it if needed.</li>
+                    </ul>
+                </div>
+    
+                <form id="userRegistrationForm" class="space-y-6">
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                        <input type="text" id="username" name="username" placeholder="lowercase letters and numbers only" class="focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Choose a password" class="focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+                    <div>
+                        <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Enter your password again" class="focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+                    
+                    <div>
+                        <label for="captchaInput" class="block text-sm font-medium text-gray-700 mb-1">Captcha</label>
+                        <div class="flex items-center space-x-4 mb-2">
+                            <span id="captchaDisplay" title="The 4 numbers to enter"></span>
+                            <button type="button" id="refreshCaptchaBtn" class="btn-secondary text-sm font-medium py-2 px-3">New Code</button>
+                        </div>
+                        <input type="text" id="captchaInput" name="captchaInput" placeholder="Enter the 4 numbers above" class="focus:ring-indigo-500 focus:border-indigo-500" required autocomplete="off">
+                    </div>
+    
+                    <button type="submit" class="btn-primary w-full shadow-md">Register Account</button>
+                </form>
+    
+                <div id="messageContainer" class="mt-6 p-4 rounded-lg text-center hidden font-medium"></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const captchaDisplay = document.getElementById('captchaDisplay');
+        const captchaInput = document.getElementById('captchaInput');
+        const refreshCaptchaBtn = document.getElementById('refreshCaptchaBtn');
+        const messageContainer = document.getElementById('messageContainer');
+        let correctCaptcha = '';
+
+        function generateCaptcha() {
+            const num = Math.floor(1000 + Math.random() * 9000);
+            correctCaptcha = num.toString();
+            captchaDisplay.textContent = correctCaptcha;
+            captchaInput.value = '';
+        }
+
+        function displayMessage(text, type = 'info') {
+            messageContainer.textContent = text;
+            messageContainer.className = 'mt-6 p-4 rounded-lg text-center font-medium'; // Reset classes
+            
+            switch (type) {
+                case 'success':
+                    messageContainer.classList.add('bg-green-100', 'text-green-800');
+                    break;
+                case 'error':
+                    messageContainer.classList.add('bg-red-100', 'text-red-800');
+                    break;
+                case 'warning': 
+                    messageContainer.classList.add('bg-yellow-100', 'text-yellow-800');
+                    break;
+                default:
+                    messageContainer.classList.add('bg-blue-100', 'text-blue-800');
+                    break;
+            }
+        }
+
+        document.getElementById('userRegistrationForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                displayMessage('Passwords do not match. Please try again.', 'error');
+                return;
+            }
+
+            if (captchaInput.value !== correctCaptcha) {
+                displayMessage('Incorrect CAPTCHA. Please try again.', 'warning');
+                generateCaptcha();
+                return;
+            }
+
+            const username = document.getElementById('username').value.trim();
+
+            if (!username || !password) {
+                displayMessage('Please enter both username and password.', 'warning');
+                return;
+            }
+
+            const usernameRegex = /^[a-z0-9]+$/;
+            if (!usernameRegex.test(username)) {
+                displayMessage('Username must contain only lowercase letters (a-z) and numbers (0-9).', 'warning');
+                return;
+            }
+
+            const MIN_PASSWORD_LENGTH = 3;
+            if (password.length < MIN_PASSWORD_LENGTH) {
+                displayMessage(`Password must be at least ${MIN_PASSWORD_LENGTH} characters long.`, 'warning');
+                return;
+            }
+
+            const apiUrl = 'https://registertestdomain.duckdns.org/register';
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    displayMessage('Registration successful! Redirecting to login...', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'play.html';
+                    }, 2500);
+                } else {
+                    displayMessage(result.error || 'An unknown error occurred.', 'error');
+                }
+            } catch (error) {
+                console.error('Registration request failed:', error);
+                displayMessage('Network error or server is not reachable.', 'error');
+            }
+            
+            generateCaptcha();
+        });
+
+        generateCaptcha();
+    </script>
+</body>
+</html>
