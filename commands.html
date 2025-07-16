@@ -10,6 +10,7 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f0f2f5;
+            padding-top: 80px;
         }
         .container {
             max-width: 800px;
@@ -54,35 +55,66 @@
             text-decoration: underline;
         }
         .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
             display: flex;
             justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid #e5e7eb;
+            width: 100%;
+        }
+        .nav-group {
+            display: flex;
             gap: 0.5rem;
-            margin-bottom: 2rem;
-            padding: 0.75rem;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            border: 1px solid #e5e7eb;
+            flex: 1;
+        }
+        .nav-group.left {
+            justify-content: flex-end;
+        }
+        .nav-group.right {
+            justify-content: flex-start;
         }
         .nav-button {
             padding: 8px 16px;
             border-radius: 6px;
-            font-weight: 500;
+            font-weight: 600;
             text-decoration: none;
             color: #374151;
-            background-color: #f9fafb;
-            border: 1px solid #d1d5db;
+            background-color: transparent;
+            border: 2px solid transparent;
             transition: all 0.2s;
         }
         .nav-button:hover {
             background-color: #f3f4f6;
-            border-color: #9ca3af;
-            transform: translateY(-1px);
+            transform: none;
         }
         .nav-button.active {
-            background-color: #4f46e5;
+            color: #4f46e5;
+            border-bottom: 2px solid #4f46e5;
+            border-radius: 6px 6px 0 0;
+        }
+        .play-button {
+            padding: 10px 24px;
+            font-size: 1.125rem;
+            font-weight: 700;
             color: white;
-            border-color: #4f46e5;
+            background-color: #22c55e;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        .play-button:hover {
+            background-color: #16a34a;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
         }
         .command-section {
             margin-bottom: 2rem;
@@ -92,93 +124,100 @@
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
-    <div class="container">
-        <div class="nav-bar">
-            <a href="index.html" class="nav-button">Register</a>
+<body class="pt-24">
+    <header class="nav-bar">
+        <div class="nav-group left">
+            <a href="register.html" class="nav-button">Register</a>
             <a href="commands.html" class="nav-button active">Commands</a>
+        </div>
+        <a href="play.html" class="play-button">Play</a>
+        <div class="nav-group right">
             <a href="horse-generator.html" class="nav-button">Horse Generator</a>
             <a href="news.html" class="nav-button">News</a>
         </div>
+    </header>
 
-        <div class="bg-white p-8 rounded-lg shadow-xl border border-gray-200">
-            <div class="bg-red-100 border border-red-400 text-red-700 text-center font-bold px-4 py-3 rounded-lg mb-8" role="alert">
-                IMPORTANT: Paste these commands in the ranch chat, NOT the global/all chat! Otherwise they'll do nothing!
-            </div>
-
-            <h1 class="text-3xl font-bold text-center text-gray-800 mb-4">Available Chat Commands</h1>
-            <p class="text-center text-gray-600 mb-2">
-                For help generating commands for items and horses, please visit this helpful website: 
-                <a href="https://samuelll41.github.io/alicia/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 font-medium">samuelll41.github.io/alicia/</a>
-            </p>
-            <p class="text-center text-gray-500 text-sm mb-8">
-                Note: To ignore any parameter and keep its current value, simply specify 0 as the value.
-            </p>
-
-            <div class="info-box command-section">
-                <h2>Show Online Players</h2>
-                <p>Displays the current player count and a list of all online players.</p>
-                <code>//online</code>
-                <p class="font-medium text-gray-700">Usage Example:</p>
-                <code>//online</code>
-            </div>
-
-            <div class="info-box command-section">
-                <h2>Set Emblem</h2>
-                <p>Sets your account's emblem. You must restart the game for the change to appear.</p>
-                <code>//emblem &lt;ID&gt;</code>
-                <p class="font-medium text-gray-700">Usage Example:</p>
-                <code>//emblem 26</code>
-            </div>
-
-            <div class="info-box command-section">
-                <h2>Give Item</h2>
-                <p>Gives your player an item. Claim it from the "Received Gifts" tab in the Gifts menu in the inventory. <br>Navigate like this: <strong>Inventory > Open Storage > Received Gifts</strong></p>
-                <code>//give item &lt;count&gt; &lt;tid&gt;</code>
-                <p class="font-medium text-gray-700">Usage Example:</p>
-                <code>//give item 1 10050</code>
-            </div>
-
-            <div class="info-box command-section">
-                <h2>Change Horse Coat & Parts</h2>
-                <p>Changes the appearance of your horse's coat, face, mane, and tail. You must restart the game for the change to appear.</p>
-                <code>//horse parts &lt;skinId&gt; &lt;faceId&gt; &lt;maneId&gt; &lt;tailId&gt;</code>
-                <p class="font-medium text-gray-700">Usage Example:</p>
-                <code>//horse parts 14 0 5 5</code>
-            </div>
-
-            <div class="info-box command-section">
-                <h2>Change Horse Proportions</h2>
-                <p>Adjusts the physical proportions of your horse. The default value for each setting is 5. You must restart the game for the change to appear.</p>
-                <code>//horse appearance &lt;scale&gt; &lt;legLength&gt; &lt;legVolume&gt; &lt;bodyLength&gt; &lt;bodyVolume&gt;</code>
-                <p class="font-medium text-gray-700">Usage Example:</p>
-                <code>//horse appearance 10 10 10 10 10</code>
-            </div>
-
-            <div class="info-box command-section">
-                <h2>Randomize Horse</h2>
-                <p>Randomizes the appearance and parts of the horse you are currently riding. You must restart the game for the change to appear.</p>
-                <code>//horse randomize</code>
-                <p class="font-medium text-gray-700">Usage Example:</p>
-                <code>//horse randomize</code>
-            </div>
-
-            <div class="info-box command-section">
-                <h2>Set Character Model</h2>
-                <p>Changes your character's model ID.</p>
-                <code>//model &lt;modelid&gt;</code>
-                <p class="font-medium text-gray-700">Usage Example (Invisible Character):</p>
-                <code>//model 0</code>
-            </div>
-            
-            <div class="info-box command-section">
-                <h2>Visit Player</h2>
-                <p>Sets your next portal destination to another player's ranch. The player must be online. This is a one-time teleport; portal destinations will be random again afterwards.</p>
-                <code>//visit &lt;player&gt;</code>
-                <p class="font-medium text-gray-700">Usage Example:</p>
-                <code>//visit Chrommd</code>
+    <main class="flex items-center justify-center p-4">
+        <div class="container">
+            <div class="bg-white p-8 rounded-lg shadow-xl border border-gray-200">
+                <div class="bg-red-100 border border-red-400 text-red-700 text-center font-bold px-4 py-3 rounded-lg mb-8" role="alert">
+                    IMPORTANT: Paste these commands in the ranch chat, NOT the global/all chat! Otherwise they'll do nothing!
+                </div>
+    
+                <h1 class="text-3xl font-bold text-center text-gray-800 mb-4">Available Chat Commands</h1>
+                <p class="text-center text-gray-600 mb-2">
+                    For help generating commands for items and horses, please visit this helpful website: 
+                    <a href="https://samuelll41.github.io/alicia/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 font-medium">samuelll41.github.io/alicia/</a>
+                </p>
+                <p class="text-center text-gray-500 text-sm mb-8">
+                    Note: To ignore any parameter and keep its current value, simply specify 0 as the value.
+                </p>
+    
+                <div class="info-box command-section">
+                    <h2>Show Online Players</h2>
+                    <p>Displays the current player count and a list of all online players.</p>
+                    <code>//online</code>
+                    <p class="font-medium text-gray-700">Usage Example:</p>
+                    <code>//online</code>
+                </div>
+    
+                <div class="info-box command-section">
+                    <h2>Set Emblem</h2>
+                    <p>Sets your account's emblem. You must restart the game for the change to appear.</p>
+                    <code>//emblem &lt;ID&gt;</code>
+                    <p class="font-medium text-gray-700">Usage Example:</p>
+                    <code>//emblem 26</code>
+                </div>
+    
+                <div class="info-box command-section">
+                    <h2>Give Item</h2>
+                    <p>Gives your player an item. Claim it from the "Received Gifts" tab in the Gifts menu in the inventory. <br>Navigate like this: <strong>Inventory > Open Storage > Received Gifts</strong></p>
+                    <code>//give item &lt;count&gt; &lt;tid&gt;</code>
+                    <p class="font-medium text-gray-700">Usage Example:</p>
+                    <code>//give item 1 10050</code>
+                </div>
+    
+                <div class="info-box command-section">
+                    <h2>Change Horse Coat & Parts</h2>
+                    <p>Changes the appearance of your horse's coat, face, mane, and tail. You must restart the game for the change to appear.</p>
+                    <code>//horse parts &lt;skinId&gt; &lt;faceId&gt; &lt;maneId&gt; &lt;tailId&gt;</code>
+                    <p class="font-medium text-gray-700">Usage Example:</p>
+                    <code>//horse parts 14 0 5 5</code>
+                </div>
+    
+                <div class="info-box command-section">
+                    <h2>Change Horse Proportions</h2>
+                    <p>Adjusts the physical proportions of your horse. The default value for each setting is 5. You must restart the game for the change to appear.</p>
+                    <code>//horse appearance &lt;scale&gt; &lt;legLength&gt; &lt;legVolume&gt; &lt;bodyLength&gt; &lt;bodyVolume&gt;</code>
+                    <p class="font-medium text-gray-700">Usage Example:</p>
+                    <code>//horse appearance 10 10 10 10 10</code>
+                </div>
+    
+                <div class="info-box command-section">
+                    <h2>Randomize Horse</h2>
+                    <p>Randomizes the appearance and parts of the horse you are currently riding. You must restart the game for the change to appear.</p>
+                    <code>//horse randomize</code>
+                    <p class="font-medium text-gray-700">Usage Example:</p>
+                    <code>//horse randomize</code>
+                </div>
+    
+                <div class="info-box command-section">
+                    <h2>Set Character Model</h2>
+                    <p>Changes your character's model ID.</p>
+                    <code>//model &lt;modelid&gt;</code>
+                    <p class="font-medium text-gray-700">Usage Example (Invisible Character):</p>
+                    <code>//model 0</code>
+                </div>
+                
+                <div class="info-box command-section">
+                    <h2>Visit Player</h2>
+                    <p>Sets your next portal destination to another player's ranch. The player must be online. This is a one-time teleport; portal destinations will be random again afterwards.</p>
+                    <code>//visit &lt;player&gt;</code>
+                    <p class="font-medium text-gray-700">Usage Example:</p>
+                    <code>//visit Chrommd</code>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 </body>
 </html>
