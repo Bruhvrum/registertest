@@ -233,8 +233,8 @@
                 localStorage.removeItem('soa_username');
             }
 
-            // IMPORTANT: Replace this with the actual URL of your backend server.
-            const apiUrl = 'http://YOUR_SERVER_IP:5000/login';
+            // The API endpoint for the login functionality
+            const apiUrl = 'https://registertestdomain.duckdns.org/login';
 
             try {
                 const response = await fetch(apiUrl, {
