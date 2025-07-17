@@ -225,6 +225,26 @@
             }
         }
 
+        function handleLaunch() {
+            let timeout;
+
+            const onBlur = () => {
+                // The browser window lost focus, which means the launcher probably opened.
+                // We can clear the timeout to prevent the error message from showing.
+                clearTimeout(timeout);
+                window.removeEventListener('blur', onBlur);
+            };
+
+            window.addEventListener('blur', onBlur);
+
+            // Set a timer. If it completes without the window losing focus,
+            // we assume the launcher isn't installed.
+            timeout = setTimeout(() => {
+                setButtonState('error', 'Launch failed. Make sure you have the launcher installed.');
+                window.removeEventListener('blur', onBlur);
+            }, 2500);
+        }
+
         loginForm.addEventListener('submit', async function(event) {
             event.preventDefault();
             setButtonState('loading');
@@ -254,8 +274,15 @@
                     const token = result.token;
                     
                     const protocolLink = `soa://3?username=${username}&token=${token}`;
+                    
+                    // Start the launch detection logic
+                    handleLaunch();
+                    
+                    // Attempt to launch the game
                     window.location.href = protocolLink;
 
+                    // Reset the button to idle after a few seconds regardless,
+                    // so the user can try again if needed.
                     setTimeout(() => setButtonState('idle'), 3000);
 
                 } else {
