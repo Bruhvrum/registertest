@@ -266,27 +266,25 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, password })
                 });
+                
+                const result = await response.json();
 
-                if (response.status === 429) {
-                    setButtonState('error', 'You have sent too many requests. Please try again later.');
-                } else if (response.ok) {
-                    const result = await response.json();
+                if (response.ok && result.success) {
+                    setButtonState('success');
+                    const token = result.token;
+                    const protocolLink = `soa://3?username=${username}&token=${token}`;
                     
-                    if (result.success) {
-                        setButtonState('success');
-                        const token = result.token;
-                        const protocolLink = `soa://3?username=${username}&token=${token}`;
-                        
-                        handleLaunch();
-                        
-                        window.location.href = protocolLink;
+                    handleLaunch();
+                    
+                    window.location.href = protocolLink;
 
-                        setTimeout(() => setButtonState('idle'), 3000);
-                    } else {
-                        setButtonState('error', result.error || 'Invalid username or password.');
-                    }
+                    setTimeout(() => setButtonState('idle'), 3000);
+
+                } else if (response.status === 429) {
+                    setButtonState('error', result.error || 'You have sent too many requests. Please try again later.');
+
                 } else {
-                    setButtonState('error', 'Network error or server is not reachable.');
+                    setButtonState('error', result.error || 'Invalid username or password.');
                 }
             } catch (error) {
                 console.error('Login request failed:', error);
