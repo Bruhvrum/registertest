@@ -266,27 +266,37 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, password })
                 });
+
+                if (response.status === 429) {
+                    // Handle rate-limiting first
+                    setButtonState('error', 'You have sent too many requests. Please try again later.');
+                    return; // Return here to stop further execution
+                }
                 
+                // Only proceed to parse JSON if the status is not 429.
                 const result = await response.json();
 
                 if (response.ok && result.success) {
                     setButtonState('success');
                     const token = result.token;
                     const protocolLink = `soa://3?username=${username}&token=${token}`;
-                    
+
+                    // Start the launch detection logic
                     handleLaunch();
-                    
+
+                    // Attempt to launch the game
                     window.location.href = protocolLink;
 
+                    // Reset the button to idle after a few seconds regardless,
+                    // so the user can try again if needed.
                     setTimeout(() => setButtonState('idle'), 3000);
 
-                } else if (response.status === 429) {
-                    setButtonState('error', result.error || 'You have sent too many requests. Please try again later.');
-
                 } else {
+                    // Handles all other types of errors, including invalid credentials.
                     setButtonState('error', result.error || 'Invalid username or password.');
                 }
             } catch (error) {
+                // Catches network-level errors
                 console.error('Login request failed:', error);
                 setButtonState('error', 'Network error or server is not reachable.');
             }
