@@ -190,6 +190,63 @@
             <div class="bg-white p-8 rounded-lg shadow-xl border border-gray-200">
                 <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Server News & Updates</h1>
 
+                <!-- NEW NEWS ITEM: September 5th -->
+                <div class="news-item">
+                    <div class="news-header">
+                        <h2>Server Changelog: September 5th</h2>
+                        <svg class="icon w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="news-content">
+                        <p>Hello everyone,</p>
+                        <p>A new server patch has been deployed with a large number of updates, bug fixes, and new features. Please see the summary of changes below.</p>
+
+                        <h3 class="sub-heading">New & Updated Systems</h3>
+                        <ul>
+                            <li><strong>Ranches Open by Default:</strong> Based on a recent community poll, ranches are now unlocked by default. You can still choose to lock your ranch if you wish.</li>
+                            <li><strong>Messenger Implementation (WIP):</strong> This is the first implementation of the friends list. It currently serves as a simple list of online ranches/players you can visit by clicking on an icon next to their name. It serves no other functionality as of right now, so adding friends, chatting, or sending emails will not work. It's a simple and better alternative to the <code>//visit</code> command.</li>
+                            <li><strong>Incubator Implementation (WIP):</strong> You can now incubate and hatch eggs! Because of this, you will no longer be able to give yourself a pet directly via the <code>//give</code> command, only eggs. Fear not, as the boost logic isn't fully implemented so you can boost your egg hatch infinitely until it's ready to hatch, and you won't get any refined crystals deducted as of right now either. So boost to your heart's desire! **NOTE OF A BUG!/incomplete feature:** Once you acquire the pet from the egg, summoning it will not summon the pet until you restart the client; however, if you wish to un-summon the pet, that will work without restarting. You can find the list of all of the eggs that you can give yourself as well as generate the give command on this website: <a href="https://samuelll41.io/alicia/">https://samuelll41.github.io/alicia/</a>.</li>
+                            <li><strong>New Item Presets Command:</strong> The <code>//give</code> command has a new sub-command "preset". You can choose from a variety of item presets for a quick give-all. Currently, you can choose from these presets:
+                                <ul>
+                                    <li><strong>feed:</strong> all feed items</li>
+                                    <li><strong>clean:</strong> all wash items</li>
+                                    <li><strong>play:</strong> all play items</li>
+                                    <li><strong>cure:</strong> all cure items</li>
+                                    <li><strong>construct:</strong> all construct/housing related items</li>
+                                </ul>
+                                <p><strong>Example usage:</strong> <code>//give preset feed</code></p>
+                                <p><strong>Note:</strong> A client restart is required to see the items given by this command.</p>
+                            </li>
+                            <li><strong>Horse Stamina Implementation:</strong> Horse stamina can now be refilled and will correctly deduct the amount of carrots from the player.</li>
+                            <li><strong>Character Information:</strong> Stats in the character info menu have been identified and are ready for future use, but for now, all are set to 0.</li>
+                        </ul>
+
+                        <h3 class="sub-heading">Guild Implementation Improvements</h3>
+                        <ul>
+                            <li><strong>Initial Guild Ranking Implementation:</strong> An initial guild ranking system has been implemented for future use but currently does not have any functionality.</li>
+                            <li><strong>Leave Guild:</strong> You can now leave a guild. (The cooldown for joining/creating a new guild is not yet implemented.)</li>
+                            <li><strong>Guild Creation Fee:</strong> Creating a guild will now correctly deduct 3,000 carrots from the player and correctly update their current carrot amount.</li>
+                        </ul>
+
+                        <h3 class="sub-heading">Bug Fixes & Improvements</h3>
+                        <ul>
+                            <li><strong>Horse Stats:</strong> Fixed incorrect assignment of some horse stats.</li>
+                            <li><strong>Housing:</strong> General improvements have been made to the housing implementation.</li>
+                            <li><strong>Storage:</strong> The storage system will now display the correct timestamp for when a gift has arrived, and a notification will pop up above the inventory.</li>
+                            <li><strong>General Improvements:</strong> General improvements to bug fixes have been implemented.</li>
+                        </ul>
+
+                        <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Notice: data has been wiped!</h3>
+                        <p>Please be advised that all player data has been wiped. This was a necessary step to accommodate ongoing development and recent server-side changes. As the project evolves, further data wipes will be required periodically to support future updates.</p>
+
+                        <p class="mt-6"><strong>Thank you for playing and testing on my server! Please make sure to report any bugs and glitches you encounter so we can resolve them quickly. Thank you and have fun.</strong></p>
+
+                        <div class="disclaimer">
+                            <p><strong>Disclaimer:</strong> This server is a test environment. As such, it is not stable and users may encounter crashes, bugs, and other unexpected issues.</p>
+                            <p class="mt-4">Thank you for your understanding.</p>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- NEW NEWS ITEM: August 19th -->
                 <div class="news-item">
                     <div class="news-header">
