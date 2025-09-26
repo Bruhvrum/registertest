@@ -129,7 +129,7 @@
             margin-bottom: 0.75rem;
         }
         .news-content strong {
-            font-weight: 600;
+            font-weight: 700; /* Ensuring strong is fully bold */
             color: #111827;
         }
         .news-content code {
@@ -190,6 +190,56 @@
             <div class="bg-white p-8 rounded-lg shadow-xl border border-gray-200">
                 <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Server News & Updates</h1>
 
+                <!-- NEW NEWS ITEM: September 26th -->
+                <div class="news-item">
+                    <div class="news-header">
+                        <h2>Server Changelog: September 26th</h2>
+                        <svg class="icon w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="news-content">
+                        <p>Hello everyone,</p>
+                        <p>A new server patch has been deployed, incorporating the latest updates and stability improvements from the latest commits to the master branch. Please see the summary of changes below.</p>
+
+                        <h3 class="sub-heading">New Features & Implementations (WIP)</h3>
+                        <ul>
+                            <li><strong>Infractions Implementation (WIP):</strong> The server now has basic moderation tools to punish players who break the rules. These are currently only available to players with the <strong>GM role</strong>. Note that in-game rules are not yet finalized, but you can still be punished for obvious bad actions (e.g., harassment).</li>
+                            <li><strong>Pet System Improvements:</strong> Various fixes and improvements have been made to the pet system.</li>
+                            <li><strong>Horse Profile Update:</strong> Ranch mount records have been implemented and now appear in the horse profile.</li>
+                        </ul>
+
+                        <h3 class="sub-heading">New Commands</h3>
+                        <ul>
+                            <li><strong>//help:</strong> A new help command showing available commands. (Does not include older commands; you can find those on the <a href="commands.html">commands page</a>).</li>
+                            <li><strong>//about:</strong> Shows information about the currently running server version as well as who hosts the server.</li>
+                            <li><strong>//create:</strong> Sends you back to the character creator to create a new character. (<strong>Client restart required</strong>).</li>
+                        </ul>
+
+                        <h3 class="sub-heading">Core Fixes & Stability</h3>
+                        <ul>
+                            <li><strong>Ranch Player List Fix:</strong> Fixed the ranch player list showing an incorrect age and not respecting privacy options.</li>
+                            <li><strong>Lobby Count Fix:</strong> Fixed the lobby player count showing an incorrect amount of players.</li>
+                            <li><strong>Horse Armor Fix:</strong> Fixed a bug related to horse armor equipment.</li>
+                            <li><strong>General Fixes:</strong> Various general bug fixes and stability improvements have been implemented.</li>
+                        </ul>
+                        
+                        <h3 class="sub-heading">Website & Backend Updates</h3>
+                        <ul>
+                            <li><strong>Registration Script Update:</strong> The registration script has been updated to support the new Infractions system and merge all current users into the new system.</li>
+                            <li><strong>Commands Page:</strong> New commands have been added to the commands section on this website.</li>
+                        </ul>
+
+                        <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Notice: data has been wiped!</h3>
+                        <p>Please be advised that all player data has been wiped. This was a necessary step to accommodate ongoing development and recent server-side changes. As the project evolves, further data wipes will be required periodically to support future updates.</p>
+
+                        <p class="mt-6"><strong>Thank you for playing and testing on my server! Please make sure to report any bugs and glitches you encounter so we can resolve them quickly. Thank you and have fun.</strong></p>
+
+                        <div class="disclaimer">
+                            <p><strong>Disclaimer:</strong> This server is a test environment. As such, it is not stable and users may encounter crashes, bugs, and other unexpected issues.</p>
+                            <p class="mt-4">Thank you for your understanding.</p>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- NEW NEWS ITEM: September 5th -->
                 <div class="news-item">
                     <div class="news-header">
@@ -204,7 +254,7 @@
                         <ul>
                             <li><strong>Ranches Open by Default:</strong> Based on a recent community poll, ranches are now unlocked by default. You can still choose to lock your ranch if you wish.</li>
                             <li><strong>Messenger Implementation (WIP):</strong> This is the first implementation of the friends list. It currently serves as a simple list of online ranches/players you can visit by clicking on an icon next to their name. It serves no other functionality as of right now, so adding friends, chatting, or sending emails will not work. It's a simple and better alternative to the <code>//visit</code> command.</li>
-                            <li><strong>Incubator Implementation (WIP):</strong> You can now incubate and hatch eggs! Because of this, you will no longer be able to give yourself a pet directly via the <code>//give</code> command, only eggs. Fear not, as the boost logic isn't fully implemented so you can boost your egg hatch infinitely until it's ready to hatch, and you won't get any refined crystals deducted as of right now either. So boost to your heart's desire! **NOTE OF A BUG!/incomplete feature:** Once you acquire the pet from the egg, summoning it will not summon the pet until you restart the client; however, if you wish to un-summon the pet, that will work without restarting. You can find the list of all of the eggs that you can give yourself as well as generate the give command on this website: <a href="https://samuelll41.io/alicia/">https://samuelll41.github.io/alicia/</a>.</li>
+                            <li><strong>Incubator Implementation (WIP):</strong> You can now incubate and hatch eggs! Because of this, you will no longer be able to give yourself a pet directly via the <code>//give</code> command, only eggs. Fear not, as the boost logic isn't fully implemented so you can boost your egg hatch infinitely until it's ready to hatch, and you won't get any refined crystals deducted as of right now either. So boost to your heart's desire! <br><strong>NOTE OF A BUG!/incomplete feature:</strong> Once you acquire the pet from the egg, summoning it will not summon the pet until you restart the client; however, if you wish to un-summon the pet, that will work without restarting. You can find the list of all of the eggs that you can give yourself as well as generate the give command on this website: <a href="https://samuelll41.github.io/alicia/">https://samuelll41.github.io/alicia/</a>.</li>
                             <li><strong>New Item Presets Command:</strong> The <code>//give</code> command has a new sub-command "preset". You can choose from a variety of item presets for a quick give-all. Currently, you can choose from these presets:
                                 <ul>
                                     <li><strong>feed:</strong> all feed items</li>
@@ -213,7 +263,6 @@
                                     <li><strong>cure:</strong> all cure items</li>
                                     <li><strong>construct:</strong> all construct/housing related items</li>
                                 </ul>
-                                <p><strong>Example usage:</strong> <code>//give preset feed</code></p>
                                 <p><strong>Note:</strong> A client restart is required to see the items given by this command.</p>
                             </li>
                             <li><strong>Horse Stamina Implementation:</strong> Horse stamina can now be refilled and will correctly deduct the amount of carrots from the player.</li>
@@ -232,7 +281,7 @@
                             <li><strong>Horse Stats:</strong> Fixed incorrect assignment of some horse stats.</li>
                             <li><strong>Housing:</strong> General improvements have been made to the housing implementation.</li>
                             <li><strong>Storage:</strong> The storage system will now display the correct timestamp for when a gift has arrived, and a notification will pop up above the inventory.</li>
-                            <li><strong>General Improvements:</strong> General improvements and bug fixes have been implemented.</li>
+                            <li><strong>General Improvements:</strong> General improvements to bug fixes have been implemented.</li>
                         </ul>
 
                         <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Notice: data has been wiped!</h3>
@@ -271,7 +320,7 @@
                     </div>
                 </div>
     
-                <!-- NEW NEWS ITEM: August 3rd -->
+                <!-- EXISTING NEWS ITEM: August 3rd -->
                 <div class="news-item">
                     <div class="news-header">
                         <h2>Server Changelog: August 3rd</h2>
@@ -289,11 +338,11 @@
                         <p>Please be advised that all player data has been wiped. This was a necessary step to accommodate ongoing development and recent server-side changes. As the project evolves, further data wipes will be required periodically to support future updates.</p>
                         <div class="disclaimer">
                             <p><strong>Disclaimer:</strong> This server is a test environment. As such, it is not stable and users may encounter crashes, bugs, and other unexpected issues.</p>
-                             <p class="mt-4">Thank you for your understanding.</p>
+                            <p class="mt-4">Thank you for your understanding.</p>
                         </div>
                     </div>
                 </div>
-
+    
                 <!-- EXISTING NEWS ITEM: July 31st -->
                 <div class="news-item">
                     <div class="news-header">
@@ -308,11 +357,11 @@
                             <li><strong>Ranch Structures Repair:</strong> The ability to repair ranch structures and buildings has been implemented.</li>
                             <li><strong>General Improvements:</strong> This update also includes various background bug fixes and server stability improvements.</li>
                         </ul>
-                        <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Important Notice Regarding Data Wipes</h3>
+                        <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Notice: data has been wiped!</h3>
                         <p>Please be advised that all player data has been wiped. This was a necessary step to accommodate ongoing development and recent server-side changes. As the project evolves, further data wipes will be required periodically to support future updates.</p>
                         <div class="disclaimer">
                             <p><strong>Disclaimer:</strong> This server is a test environment. As such, it is not stable and users may encounter crashes, bugs, and other unexpected issues.</p>
-                             <p class="mt-4">Thank you for your understanding.</p>
+                            <p class="mt-4">Thank you for your understanding.</p>
                         </div>
                     </div>
                 </div>
@@ -325,7 +374,7 @@
                     </div>
                     <div class="news-content">
                         <p>Hello everyone,</p>
-                        <p>Today marks a huge step forward for the server with the release of a brand new launcher and major quality-of-life updates. Please see the summary of changes below.</p>
+                        <p>A new server patch has been deployed, incorporating the latest updates and stability improvements from the latest commits to the master branch. Please see the summary of changes below.</p>
                         
                         <h3 class="sub-heading">Launcher & Website Overhaul</h3>
                         <ul>
@@ -351,7 +400,7 @@
                         <h3 class="text-xl font-bold text-green-700 mt-6 mb-2">Data Integrity Notice</h3>
                         <p>No data wipe was required for this update. All player data remains intact.</p>
 
-                        <p class="mt-6">As always, thank you for playing and testing out the server. Please report any bugs you encounter!</p>
+                        <p class="mt-6"><strong>Thank you for playing and testing on my server! Please make sure to report any bugs and glitches you encounter so we can resolve them quickly. Thank you and have fun.</strong></p>
 
                         <div class="disclaimer">
                             <p><strong>Disclaimer:</strong> This server is a test environment. As such, it is not stable and users may encounter crashes, bugs, and other unexpected issues.</p>
@@ -374,7 +423,7 @@
                             <li><strong>Game Master System:</strong> Game Masters can now control system content. For now, this includes the ability to kick players from ranches.</li>
                             <li><strong>General Improvements:</strong> Numerous other bug fixes and stability improvements have been implemented.</li>
                         </ul>
-                        <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Important Notice Regarding Data Wipes</h3>
+                        <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Notice: data has been wiped!</h3>
                         <p>Unfortunately, to implement these new features and fixes, a full data wipe was necessary. We apologize for the inconvenience and appreciate your understanding as we work on improving and updating the server.</p>
                         <div class="disclaimer">
                             <p><strong>Disclaimer:</strong> This server is a test environment. As such, it is not stable and users may encounter crashes, bugs, and other unexpected issues.</p>
@@ -400,7 +449,7 @@
                             <li><strong>Backend YAML Support:</strong> Added a new library to support YAML configurations, improving server-side data management for future updates.</li>
                             <li><strong>Data Director Fixes:</strong> Implemented several bug fixes and stability improvements to the data director.</li>
                         </ul>
-                        <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Important Notice Regarding Data Wipes</h3>
+                        <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Notice: data has been wiped!</h3>
                         <p>Unfortunately, to implement these fundamental ranch changes, a full data wipe was necessary. We apologize for the inconvenience and appreciate your understanding as we work on improving and updating the server.</p>
                         <div class="disclaimer">
                             <p><strong>Disclaimer:</strong> This server is a test environment. As such, it is not stable and users may encounter crashes, bugs, and other unexpected issues.</p>
@@ -408,7 +457,7 @@
                         </div>
                     </div>
                 </div>
-                
+    
                 <!-- EXISTING NEWS ITEM: July 6th -->
                 <div class="news-item">
                     <div class="news-header">
@@ -421,7 +470,7 @@
                         <ul>
                             <li><strong>Korean Username Fix:</strong> Resolved an issue preventing data from being saved correctly for players with Korean characters in their usernames.</li>
                         </ul>
-                        <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Important Notice Regarding Data Wipes</h3>
+                        <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Notice: data has been wiped!</h3>
                         <p>Unfortunately, to implement this fix, a full data wipe was necessary. We apologize for the inconvenience and appreciate your understanding as we work on improving and updating the server. As the project evolves, further data wipes will be required periodically to support future updates.</p>
                         <div class="disclaimer">
                             <p><strong>Disclaimer:</strong> This server is a test environment. As such, it is not stable and users may encounter crashes, bugs, and other unexpected issues.</p>
@@ -443,7 +492,7 @@
                             <li><strong>New Command - Ranch Visits:</strong> You can now use the new command <code>//visit &lt;player&gt;</code> to set your next portal destination directly to a friend's ranch. This is a one-time teleport; the portal will revert to random visits afterwards.</li>
                             <li><strong>General Fixes:</strong> This update also includes various background bug fixes and server stability improvements.</li>
                         </ul>
-                        <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Important Notice Regarding Data Wipes</h3>
+                        <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Notice: data has been wiped!</h3>
                         <p>Please be advised that all player data has been wiped. This was a necessary step to accommodate ongoing development and recent server-side changes. As the project evolves, further data wipes will be required periodically to support future updates.</p>
                         <div class="disclaimer">
                             <p><strong>Disclaimer:</strong> This server is a test environment. As such, it is not stable and users may encounter crashes, bugs, and other unexpected issues.</p>
@@ -468,7 +517,7 @@
                             <li><strong>Automatic Restarts:</strong> The server is now configured to restart automatically following a crash. Please be aware that in the event of a crash, data may be lost if it was not saved prior to the incident.</li>
                             <li><strong>General Fixes:</strong> This update also includes various background bug fixes and server stability improvements.</li>
                         </ul>
-                        <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Important Notice Regarding Data Wipes</h3>
+                        <h3 class="text-xl font-bold text-red-700 mt-6 mb-2">Notice: data has been wiped!</h3>
                         <p>Please be advised that all player data has been wiped. This was a necessary step to accommodate ongoing development and recent server-side changes. As the project evolves, further data wipes will be required periodically to support future updates.</p>
                         <div class="disclaimer">
                             <p><strong>Disclaimer:</strong> This server is a test environment. As such, it is not stable and users may encounter crashes, bugs, and other unexpected issues.</p>
